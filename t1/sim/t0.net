@@ -7,25 +7,40 @@
 .options savecurrents
 
 * supply voltage
-Vcc vcc 0 10.0
+Va 1 4 5.10355691205
+* supply current
+Id 8 6 1.0126488524
+*dependent voltage source
+Hvc 5 8 r6 8.24825537187k
+*dependent current source
+Gib 6 3 (2,5) 7.20092310025m 
+
+*resistors
+Rr1 2 1 1.03835624717k
+Rr2 3 2 2.03980117275k
+Rr3 2 5 3.02589288375k
+Rr4 4 5 4.09496586064k
+Rr5 5 6 3.11837790188k
+Rr6 4 7 2.06517135248k
+Rr7 7 8 1.01138577854k
 
 * input voltage source
-Vin 1 0 0.0 ac 1.0 sin(0 .1 100k)
+*Vin 1 0 0.0 ac 1.0 sin(0 .1 100k)
 
-Rs 1 2 1k
+*Rs 1 2 1k
 
 * input capacitor (DC block)
-Cb 2 base 1uF
+*Cb 2 base 1uF
 
-Rf coll base 50k
+*Rf coll base 50k
 
-Q1 coll base emit P2model
+*Q1 coll base emit P2model
 
-Rc vcc coll 300
+*Rc vcc coll 300
 
-Re emit 0 100
+*Re emit 0 100
 
-Ce emit 0 10uF
+*Ce emit 0 10uF
 
 .model P2model NPN(Bf=200, CJE=12pF, CJC=2pF)
 
