@@ -13,6 +13,8 @@
 \usepackage{notoccite}
 \usepackage[skip=0.5\baselineskip]{caption}
 \hyphenation{GTKWave}
+\usepackage{ragged2e}
+\usepackage{tabto}
 \usepackage{listings}
 \usepackage[all]{nowidow}
 
@@ -90,6 +92,7 @@
 %  Cover page
 % ----------------------------------------------------------------------
 \input{frontcover}
+\newpage
 
 % ----------------------------------------------------------------------
 % Dedication page (optional)
@@ -118,6 +121,7 @@
 % Table of contents
 %
 \tableofcontents
+\newpage
 
 % List of tables
 %\addcontentsline{toc}{section}{\listtablename}
@@ -139,10 +143,13 @@
 % ----------------------------------------------------------------------
 
 \input{intro}
+\newpage
 
 \input{analysis}
+\newpage
 
 \input{simulation}
+\newpage
 
 \input{conclusion}
 %\cleardoublepage
