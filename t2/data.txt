@@ -1,6 +1,6 @@
 
 
-Please enter the lowest student number in your group: 95778
+Please enter the lowest student number in your group: 
 
 
 Units for the values: V, mA, kOhm and mS
@@ -13,8 +13,8 @@ R4 = 4.04965870654
 R5 = 3.11837790188 
 R6 = 2.06517135248 
 R7 = 1.01138577854 
-Va = 5.10355691205 
-Id = 1.0126488524 
+Vs = 5.10355691205 
+C = 1.0126488524 
 Kb = 7.20092310025 
 Kc = 8.24825537187 
 

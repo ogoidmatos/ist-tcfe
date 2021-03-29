@@ -1,4 +1,4 @@
-octave.log: t1.m
+octave.log: t2.m
 	octave $< > $@
 
 clean:
