@@ -1,0 +1,35 @@
+\section{Simulation Analysis}
+\label{sec:simulation}
+\tab Since the voltage and current sources have constant values, we only need to use the Operating Point analysis to fully study the circuit.
+
+\subsection{Operating Point Analysis}
+\label{subsec:op_analysis}
+
+\tab While using Ngspice we encountered some problems with the use of current-controlled voltage sources. To overcome them, we introduced a dummy 0V voltage source between the resistors 6 and 7, originating node 8, which does not show in the Octave results since it is not needed for theoritical calculations.
+The voltage source $V_c$ depends on the current $I_c$, which is the current on $R_6$. However, since Ngspice could not take the current in $R_6$, we introduced the null voltage source, since the current there will be $I_c$, which is the current that $V_c$ depends on.
+
+Table~\ref{tab:op} shows the simulated operating point results for the circuit
+under analysis. Compared to the theoretical analysis results, one notices the
+following differences: describe and explain the differences.
+
+First, we must take into consideration that the currents flowing through $R_1$, $R_2$, $R_3$ and $R_4$ are, respectively, equal to $I_x$, $I_y$, $I_z$ and $I_w$.
+Comparing the Tables \ref{tab:octave_currents} and \ref{tab:octave_voltages} with Table~\ref{tab:op}, we see that the difference between the different voltages and currents is minimal. Different digits beggin to appear only on the fourth decimal case and these disparities can be attributed to distinct methods of calculation and floating point.\par
+On the other hand, by analysing Table~\ref{tab:op}, we note that in each resistor the current and voltage values have the same sign, as it should be since the power of a resistor must be positive. \par
+Having verified that the theoretical results and the simulation results are very much approximate, with minor acceptable differences, we say that the methods used to study the circuit are accurate.
+
+
+\begin{table}[h]
+  \centering
+  \begin{tabular}{|l|r|}
+    \hline    
+    {\bf Name} & {\bf Value [A or V]} \\ \hline
+    \input{../sim/op_tab}
+  \end{tabular}
+  \caption{Operating point. A variable preceded by @ is of type {\em current}
+    and expressed in Ampere; other variables are of type {\it voltage} and expressed in
+    Volt.}
+  \label{tab:op}
+\end{table}
+
+
+

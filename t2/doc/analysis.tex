@@ -1,0 +1,77 @@
+\section{Theoretical Analysis}
+\label{sec:analysis}
+
+\tab In this section, the circuit shown in Figure~\ref{fig:circuit} is analysed
+theoretically, through the methods of Mesh Analysis and Node Analysis.
+
+\subsection{Mesh Analysis}
+\label{subsec:mesh}
+\tab In this subsection of the report we are going to analyse the circuit through the Mesh method in order to obtain the four currents in the four meshes of the circuit: $I_x, I_y, I_z, I_w$.
+For that, we apply Kirchhoff's Voltage Law (KVL) in each of the meshes, obtaining the following equations: 
+%Include equations-------------
+\begin{equation}
+  V_a = I_x (R_1 + R_3 + R_4) - I_y R_3 - I_z R_4;
+\end{equation}
+
+\begin{equation}
+  I_y = I_b;
+\end{equation}
+
+\begin{equation}
+  V_c = I_z (R_4 + R_6 + R_7) - I_x R_4;
+\end{equation}
+
+\begin{equation}
+  I_w = I_d.
+\end{equation}
+
+The results obtained after implementing these equations in Octave can be seen in Table~\ref{tab:octave_currents}:
+\begin{table}[h]
+  \centering
+  \begin{tabular}{|l|r|}
+    \hline    
+    {\bf Name} & {\bf Value [A]} \\ \hline
+	\input{../mat/current_tab}
+  \end{tabular}
+  \caption{Currents obtained in the theoretical analysis in Octave.}
+  \label{tab:octave_currents}
+\end{table}
+
+\subsection{Node Analysis}
+\label{subsec:node}
+\tab Here, we made use of Node Analysis to determine the voltages in each
+of the nodes. For that, we assigned the nodes an identification as you see
+in Figure~\ref{fig:circuit}.\par
+We can then solve for the nodes, by calculating the potencial diferences between each node. That leaves us with 7 equations, one for each node excluding the ground node, denoted as Node 0.
+Solving the equations, we obtain the following matrix:
+%Include matrix ----------
+\begin{equation}
+\begin{bmatrix}
+  1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+  G_1 & -G_1-G_2-G_3 & G_2 & 0 & G_3 & 0 & 0 & 0 \\
+  0 & G_2+K_b & -G_2 & 0 & -K_b & 0 & 0 & 0 \\
+  1 & 0 & 0 & -1 & 0 & 0 & 0 & 0 \\
+  0 & G_1 & 0 &-G_4-G_6 & G_4 & 0 & G_6 & 0 \\
+  0 & -K_b & 0 & 0 & G_5+K_b & -G_5 & 0 & 0 \\
+  0 & 0 & 0 & G_6 & 0 & 0 & -G_6-G_7 & G_7 \\
+  0 & 0 & 0 & -K_c G_6 & 1 & 0 & K_c G_6 & -1
+\end{bmatrix}
+\begin{bmatrix}
+  V_0 \\ V_1 \\ V_2 \\ V_3 \\ V_4 \\ V_5 \\ V_6 \\ V_7
+\end{bmatrix}
+=
+\begin{bmatrix}
+  0 \\ 0 \\ 0 \\ V_a \\ 0 \\ -I_d \\ 0 \\ 0
+\end{bmatrix}
+\end{equation}\par
+Solving the matrix in Octave, we obtain the results presented in Table~\ref{tab:octave_voltages}:
+\begin{table}[h]
+  \centering
+  \begin{tabular}{|l|r|}
+    \hline    
+    {\bf Name} & {\bf Value [V]} \\ \hline
+	\input{../mat/volt_tab}
+  \end{tabular}
+  \caption{Voltages obtained in the theoretical analysis in Octave.}
+  \label{tab:octave_voltages}
+\end{table}
