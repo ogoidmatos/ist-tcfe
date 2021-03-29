@@ -7,9 +7,9 @@ Laboratório 2
 .options savecurrents
 
 * supply voltage
-Va 1 0 5.10355691205
+Va 1 0 0
 * capacitor
-Cd 6 8 1.0126488524m
+Vd 6 8 8.677386
 
 *resistors
 Rr1 1 2 1.03835624717k
