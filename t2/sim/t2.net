@@ -9,7 +9,7 @@ Laboratório 2
 * supply voltage
 Va 1 0 5.10355691205
 * capacitor
-Cd 6 8 1.0126488524m
+Cd 6 8 1.0126488524u
 
 *resistors
 Rr1 1 2 1.03835624717k
