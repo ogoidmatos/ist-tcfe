@@ -2,31 +2,11 @@ Laboratório 2
 * NGSPICE simulation script
 * BJT amp with feedback
 *
-* capacitor
-Vd 6 8 8.4971
+
 * forces current values to be saved
 .options savecurrents
 
-* supply voltage
-Va 1 0 0
-
-
-Rr1 1 2 1.00119192001k
-Rr2 3 2 2.05601051164k
-Rr3 2 5 3.14238437911k
-Rr4 5 0 4.10348141952k
-Rr5 5 6 3.04851993814k
-Rr6 9 7 2.04484641193k
-Rr7 7 8 1.00542115789k
-
-*dummy voltage source
-Vdu 0 9 0
-
-*dependent voltage source
-Hvc 5 8 Vdu 8.08788113416k
-
-*dependent current source
-Gib 6 3 (2,5) 7.29043495344m
+.include ../mat/ngspice2.cir
 
 .control
 

@@ -4,7 +4,7 @@
 # type "make clean" to delete all generated files
 # ------------------------------------------------------------
 
-
+number = 95849
 
 all:
 	make -C mat
@@ -12,12 +12,14 @@ all:
 	make -C doc
 	cp doc/report.pdf .
 	
+python:
+	echo "$(number)" | python2 t2_datagen.py > data.txt
 
 clean:
 	make -C mat clean
 	make -C sim clean
 	make -C doc clean
 
-.PHONY: all clean
+.PHONY: all clean python
 
 

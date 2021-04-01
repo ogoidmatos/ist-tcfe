@@ -6,30 +6,7 @@ Laboratório 2
 * forces current values to be saved
 .options savecurrents
 
-* supply voltage
-Va 1 0 0
-* capacitor
-C 6 8 1.01848690215u
-
-*resistors
-Rr1 1 2 1.03835624717k
-Rr2 3 2 2.03980117275k
-Rr3 2 5 3.02589288375k
-Rr4 5 0 4.09496586064k
-Rr5 5 6 3.11837790188k
-Rr6 0 7 2.06517135248k
-Rr7 9 8 1.01138577854k
-
-*dummy voltage source
-Vdu 7 9 0
-
-*dependent voltage source
-Hvc 5 8 Vdu 8.24825537187k
-
-*dependent current source
-Gib 6 3 (2,5) 7.20092310025m
-
-.IC v(6)=5.55634 v(8)=-2.94075
+.include ../mat/ngspice3.cir
 
 .control
 *makes plots in color

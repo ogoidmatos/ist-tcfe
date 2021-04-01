@@ -5,22 +5,24 @@ clear all
 
 pkg load symbolic
 
+import=dlmread("../data.txt");
+
 %%EXAMPLE NUMERIC COMPUTATIONS
 %%Resistors Ohm
-R1 = 1.00119192001e3
-R2 = 2.05601051164e3
-R3 = 3.14238437911e3
-R4 = 4.10348141952e3 
-R5 = 3.04851993814e3 
-R6 = 2.04484641193e3 
-R7 = 1.00542115789e3
+R1 = import(3,4)*1000
+R2 = import(4,3)*1000
+R3 = import(5,3)*1000
+R4 = import(6,3)*1000
+R5 = import(7,3)*1000 
+R6 = import(8,3)*1000 
+R7 = import(9,3)*1000
 %%Voltage and Current Sources
-Va = 5.04499704365  %%V
-Kb = 7.29043495344e-3  %%S
-Kc = 8.08788113416e3 %%Ohm
+Va = import(10,3)  %%V
+Kb = import(12,3)*0.001  %%S
+Kc = import(13,3)*1000 %%Ohm
 
 %%Capacitor
-C = 1.01848690215e-6
+C = import(11,3)*0.000001
 
 %%Node analysis of the voltages in the circuit
 A = [0, 1, 0, 0, 0, 0, 0, 0;
@@ -113,8 +115,10 @@ fprintf(tab, "$V_7$ & %f+%fi \\\\ \\hline \n", real(f(7,1)), imag(f(7,1)))
 fprintf(tab, "$V_8$ & %f+%fi \\\\ \\hline \n", real(f(8,1)), imag(f(8,1)))
 fclose(tab);
 
-Vt=Vc+abs(f(6,1))*sin(w*t+acos(real(f(6,1))/abs(f(6,1))))
-Vs=sin(w*t)
+Vt=Vc+abs(f(6,1))*sin(w*t+acos(real(f(6,1))/abs(f(6,1))));
+%%Vt=Vc+abs(f(6,1))*sin(w*t-pi);
+
+Vs=sin(w*t);
 t1=-5e-3:5e-5:0;
 
 theo_4 = figure ();
@@ -130,3 +134,24 @@ print (theo_4, "theo_4.eps", "-depsc");
 
 %%Vc=f(6,1)-f(8,1)
 %%Vc=abs(Vc)*sin(
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%Export files to ngspice
+
+file=fopen("ngspice1.cir","w");
+fprintf(file,".OP\nVa 1 0 %f\nCd 6 8 %fu\nRr1 1 2 %f\nRr2 3 2 %f\nRr3 2 5 %f\nRr4 5 0 %f\nRr5 5 6 %f\nRr6 9 7 %f\nRr7 7 8 %f\nVdu 0 9 0\nHvc 5 8 Vdu %f\nGib 6 3 (2,5) %fm\n.END\n", Va, import(11,3), R1, R2, R3, R4, R5, R6, R7, Kc, import(12,3));
+fclose(file);
+
+file=fopen("ngspice2.cir","w");
+fprintf(file,".OP\nVa 1 0 0\nVd 6 8 %f\nRr1 1 2 %f\nRr2 3 2 %f\nRr3 2 5 %f\nRr4 5 0 %f\nRr5 5 6 %f\nRr6 9 7 %f\nRr7 7 8 %f\nVdu 0 9 0\nHvc 5 8 Vdu %f\nGib 6 3 (2,5) %fm\n.END\n", Vx, R1, R2, R3, R4, R5, R6, R7, Kc, import(12,3));
+fclose(file);
+
+file=fopen("ngspice3.cir","w");
+fprintf(file,".OP\nVa 1 0 0\nCd 6 8 %fu\nRr1 1 2 %f\nRr2 3 2 %f\nRr3 2 5 %f\nRr4 5 0 %f\nRr5 5 6 %f\nRr6 9 7 %f\nRr7 7 8 %f\nVdu 0 9 0\nHvc 5 8 Vdu %f\nGib 6 3 (2,5) %fm\n.IC v(6)=%f v(8)=%f\n.END\n", import(11,3), R1, R2, R3, R4, R5, R6, R7, Kc, import(12,3), a(6,1), a(8,1));
+fclose(file);
+
+file=fopen("ngspice4.cir","w");
+fprintf(file,".OP\nVa 1 0 0.0 ac 1.0 sin(0 1 1000)\nCd 6 8 %fu\nRr1 1 2 %f\nRr2 3 2 %f\nRr3 2 5 %f\nRr4 5 0 %f\nRr5 5 6 %f\nRr6 9 7 %f\nRr7 7 8 %f\nVdu 0 9 0\nHvc 5 8 Vdu %f\nGib 6 3 (2,5) %fm\n.IC v(6)=%f v(8)=%f\n.END\n", import(11,3), R1, R2, R3, R4, R5, R6, R7, Kc, import(12,3), a(6,1), a(8,1));
+fclose(file);
