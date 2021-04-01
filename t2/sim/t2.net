@@ -7,27 +7,27 @@ Laboratório 2
 .options savecurrents
 
 * supply voltage
-Va 1 0 5.10355691205
+Va 1 0 5.04499704365
 * capacitor
-Cd 6 8 1.0126488524u
+*Cd 6 8 1.01848690215u
 
 *resistors
-Rr1 1 2 1.03835624717k
-Rr2 3 2 2.03980117275k
-Rr3 2 5 3.02589288375k
-Rr4 5 0 4.09496586064k
-Rr5 5 6 3.11837790188k
-Rr6 0 7 2.06517135248k
-Rr7 9 8 1.01138577854k
+Rr1 1 2 1.00119192001k
+Rr2 3 2 2.05601051164k
+Rr3 2 5 3.14238437911k
+Rr4 5 0 4.10348141952k
+Rr5 5 6 3.04851993814k
+Rr6 9 7 2.04484641193k
+Rr7 7 8 1.00542115789k
 
 *dummy voltage source
-Vdu 7 9 0
+Vdu 0 9 0
 
 *dependent voltage source
-Hvc 5 8 Vdu 8.24825537187k
+Hvc 5 8 Vdu 8.08788113416k
 
 *dependent current source
-Gib 6 3 (2,5) 7.20092310025m
+Gib 6 3 (2,5) 7.29043495344m
 
 .control
 
