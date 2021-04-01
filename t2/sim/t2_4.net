@@ -6,8 +6,10 @@ Laboratório 2
 * forces current values to be saved
 .options savecurrents
 
+.param pi = 3.141592653589793
+
 * supply voltage
-Va 1 0 0
+Va 1 0 0.0 ac 1.0 sin(0 1 1000)
 * capacitor
 C 6 8 1.01848690215u
 
@@ -48,8 +50,20 @@ echo  "Transient analysis"
 echo "********************************************"
 tran 1e-5 20e-3
 
-hardcopy sim_3.ps v(6)
-echo sim_3_FIG
+hardcopy sim_4.ps v(1) v(6)
+echo sim_4_FIG
+
+echo "********************************************"
+echo  "Frequency analysis"
+echo "********************************************"
+ac dec 100 0.1 100MEG
+
+hardcopy sim_5_db.ps db(v(1)) db(v(6))
+echo sim_5_db_FIG
+
+hardcopy sim_5_ph.ps ph(v(1))*180/pi ph(v(6))*180/pi
+*echo sim_5_ph_FIG
+
 
 quit
 .endc

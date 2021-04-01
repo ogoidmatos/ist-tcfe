@@ -36,9 +36,10 @@ echo "********************************************"
 echo  "Operating point"
 echo "********************************************"
 
-echo "op_TAB"
-print all
-echo "op_END"
+echo "op_2_TAB"
+print @rr5[i]
+print v(6)
+echo "op_2_END"
 
 quit
 .endc
