@@ -99,16 +99,34 @@ F = [1, 0, 0, 0, 0, 0, 0, 0;
 0, 0, 0, 0, 1, 0, -Kc*1/R6, -1;
 0, -1/R1, 0, 0, 1/R4, 0, 1/R6, 0]
 
-G = [0; 1; 0; 0; 0; 0; 0; 0]
+G = [0; exp(j); 0; 0; 0; 0; 0; 0]
 f=F\G
 
 tab=fopen("volt_tab4.tex","w");
-fprintf(tab, "$V_0$ & %f \\\\ \\hline \n", f(1,1))
-fprintf(tab, "$V_1$ & %f \\\\ \\hline \n", f(2,1))
-fprintf(tab, "$V_2$ & %f \\\\ \\hline \n", f(3,1))
-fprintf(tab, "$V_3$ & %f \\\\ \\hline \n", f(4,1))
-fprintf(tab, "$V_5$ & %f \\\\ \\hline \n", f(5,1))
-fprintf(tab, "$V_6$ & %f \\\\ \\hline \n", f(6,1))
-fprintf(tab, "$V_7$ & %f \\\\ \\hline \n", f(7,1))
-fprintf(tab, "$V_8$ & %f \\\\ \\hline \n", f(8,1))
+fprintf(tab, "$V_0$ & %f+%fi \\\\ \\hline \n", real(f(1,1)), imag(f(1,1)))
+fprintf(tab, "$V_1$ & %f+%fi \\\\ \\hline \n", real(f(2,1)), imag(f(2,1)))
+fprintf(tab, "$V_2$ & %f+%fi \\\\ \\hline \n", real(f(3,1)), imag(f(3,1)))
+fprintf(tab, "$V_3$ & %f+%fi \\\\ \\hline \n", real(f(4,1)), imag(f(4,1)))
+fprintf(tab, "$V_5$ & %f+%fi \\\\ \\hline \n", real(f(5,1)), imag(f(5,1)))
+fprintf(tab, "$V_6$ & %f+%fi \\\\ \\hline \n", real(f(6,1)), imag(f(6,1)))
+fprintf(tab, "$V_7$ & %f+%fi \\\\ \\hline \n", real(f(7,1)), imag(f(7,1)))
+fprintf(tab, "$V_8$ & %f+%fi \\\\ \\hline \n", real(f(8,1)), imag(f(8,1)))
 fclose(tab);
+
+Vt=Vc+abs(f(6,1))*sin(w*t+acos(real(f(6,1))/abs(f(6,1))))
+Vs=sin(w*t)
+t1=-5e-3:5e-5:0;
+
+theo_4 = figure ();
+plot (t*1000, Vt, "b");
+hold on;
+plot (t1*1000, Vx, "b");
+plot (t*1000, Vs, "r");
+plot (t1*1000, Va, "r");
+
+xlabel ("t[ms]");
+ylabel ("V_t(t)/V_s(t) [V]");
+print (theo_4, "theo_4.eps", "-depsc");
+
+%%Vc=f(6,1)-f(8,1)
+%%Vc=abs(Vc)*sin(
