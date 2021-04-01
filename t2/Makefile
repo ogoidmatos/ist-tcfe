@@ -6,7 +6,7 @@
 
 number = 95849
 
-all:
+all:	python
 	make -C mat
 	make -C sim
 	make -C doc
