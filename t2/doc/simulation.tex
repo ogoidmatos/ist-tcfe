@@ -47,16 +47,20 @@ The current source $I_x$ and voltage $V_6$ can be found in table~\ref{tab:op2}.
 
 The graphic for the natural solution, $V_6$(t), (using transient analysis) can be seen in Figure~\ref{fig:nat_sol}.
 
+Comparing Table \ref{tab:octave_tab2} with \ref{tab:op2}, we can see that the difference between current and voltage obtained is nearly null. Moreover, looking at Figures~\ref{fig:natural} and \ref{fig:nat_sol} we can easily observe the similarities between graphics. This points us to the fact that the theorical model used aproximates very well the simulations.
+
 \begin{figure}[H] \centering
 \includegraphics[width=0.6\linewidth]{../sim/sim_3.pdf}
 \caption{Natural solution for capacitor.}
 \label{fig:nat_sol}
 \end{figure}
 %inserir grafico
-
+\newpage
 \subsection{Operating Point Analysis for t$>$0 (natural and forced solution)}
 
-\tab The graphic for the natural and forced responses on $V_6$(t) and on $V_1$ (voltage source):
+\tab The graphic for the natural and forced responses on $V_6$(t) and on $V_1$ (voltage source) can be observed in Figure~\ref{fig:ph}. Once again, we can conclude that the natural response of the capacitor tends to fade, while the forced response starts to prevail. At the end of the period in study, we can observe that capacitor has a difference of Pi in phase with the voltage source.
+
+Comparing Figure~\ref{fig:final} and Figure~\ref{fig:nat_for}, from Octave and Ngspice respectively, we can observe that the results are identical, which is to be expected, since the circuit is composed by linear components only.
 
 \begin{figure}[H] \centering
 \includegraphics[width=0.6\linewidth]{../sim/sim_4.pdf}
@@ -65,7 +69,8 @@ The graphic for the natural solution, $V_6$(t), (using transient analysis) can b
 \end{figure}
 %inserir grafico
 \subsection{Frequency response}
-\tab The graphics for the frequency response are seen in Figure~\ref{fig:db} and \ref{fig:ph}.
+\tab The graphics for the frequency response are seen in Figure~\ref{fig:db} and \ref{fig:ph}. As can be seen in the graph, $V_c$'s magnitude is constant, since it is independent from the frequency. $V_c$ and $V_6$ are dependent of the frequency and this leads $V_c$ to 0, since $V_c$ is inversely proporcional to the frequency.
+Octave's (Figure~\ref{fig:theo_db}) and ngspice's (Figure~\ref{fig:db}) graphs are similiar. Since the circuit is linear, this was expected, so it can be concluded that the model used is a very good aproximation. Once again, we can observe that the phase drops when the frequency increases, pointing out the very similar results in Figure~\ref{fig:theo_ph} and Figure~\ref{fig:ph}.
 
 \begin{figure}[H] \centering
 \includegraphics[width=0.6\linewidth]{../sim/sim_5_db.pdf}
@@ -79,28 +84,4 @@ The graphic for the natural solution, $V_6$(t), (using transient analysis) can b
 \label{fig:ph}
 \end{figure}
 
-%inserir comentario
-$V_s$ and $V_6$ differ since $V_6$ is connected to a capacitor and therefore it will be the sum of a natural and a forced solution whilst $V_s$ is just a voltage source. % ver se é preciso comentar aqui qlq cena mais (comparar c outro trabalho)
-
-\section{Comparing Octave and Ngspice}
-
-\subsection{Operating Point Analysis for t$<$0}
-\tab The difference between the results is minimal, as can be seen by comparing the table. The results are equal since the circuit is linear.
-
-%inserir tabelas comparativas
-\par
-
-\subsection{Operating Point Analysis for t>0 (natural solution)}
-The graphics are similar, as one would expect since the components are linear and therefore the circuit is linear.
-%inserir graficos 
-\par
-
-\subsection{Operating Point Analysis for t>0 (forced solution)}
-
-The graphics are similar, since the circuit is linear and we are using ideal voltage and current sources.
-
-%inserir graficos
-
-\subsection{Frequency response}
-
-As one would expect the graphics are very similar and one can't find any significant discrepancies. This is the result of the circuit being linear
+\newpage

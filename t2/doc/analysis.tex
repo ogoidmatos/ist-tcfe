@@ -80,7 +80,7 @@ Node analysis matrix:
 \end{bmatrix}
 \end{equation}
 
-\begin{equation}[H]
+\begin{equation}
 R_eq = (V_x / I_x)
 \end{equation}
 
@@ -94,7 +94,7 @@ R_eq = (V_x / I_x)
   \caption{Equivalent current, voltage and resistor obtained in the theoretical analysis in Octave.}
   \label{tab:octave_tab2}
 \end{table}
-\begin{equation}[H]
+\begin{equation}
 V_n = V_x * exp( -t / (R_eq * C))
 \end{equation}
 %inserir resultados
@@ -108,10 +108,10 @@ With the results obtained before we ploted the natural solution in Figure~\ref{f
 \end{figure}
 
 %ponto 4
-
+\newpage
 \subsection{Node Analysis for t$\geq$0 (Forced solution)}
 
-\tab To determine the forced solution we used a phasor voltage source $V_s$ = 1 V and then we applied the Node analysis (in which C was replaced by its impedance.
+\tab To determine the forced solution we used a phasor voltage source $V_s$ = 1 V and then we applied the Node analysis (in which C was replaced by its impedance).
 
 Node analysis matrix:
 %Include matrix ----------
@@ -131,7 +131,7 @@ Node analysis matrix:
 \end{bmatrix}
 =
 \begin{bmatrix}
-  0 \\ exp(j) \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0
+  0 \\ exp(-j) \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0
 \end{bmatrix}
 \end{equation}
 
@@ -145,16 +145,16 @@ Node analysis matrix:
   \caption{Complex voltages obtained in the theoretical analysis in Octave.}
   \label{tab:octave_4}
 \end{table}
-
+\newpage
 \subsection{Final Solution}
 
 \tab The final solution is: 
 
-\begin {equation}[H]
+\begin {equation}
 V_t = V_6 - V_8, for\;t<0
 \end {equation}
-\begin {equation}[H]
-V_t = V_n + abs(v_6) * sen (2 * pi * f * t + acos(Re(v_6) / abs(v_6))), for\;t>=0
+\begin {equation}
+V_t = V_n + abs(v_6) * cos(2 * pi * f * t + acos(Re(v_6) / abs(v_6))), for\;t>=0
 \end {equation}
 
 The plot of $V_t$ and $V_s$ is in Figure~\ref{fig:final}.
@@ -165,7 +165,23 @@ The plot of $V_t$ and $V_s$ is in Figure~\ref{fig:final}.
 \label{fig:final}
 \end{figure}
 
+Here, the model used is one in which, as can be seen in Figure~\ref{fig:final}, the natural solution of the capacitor tends to diminish into the forced solution given by the sinusoidal excitation of the voltage source $V_s$. Finally, at the end of the period studied (t=20ms),it can be observed that the phase of the voltage on the capacitor differs Pi from the phase of voltage source. 
+
 \subsection{Frequency responses}
-\tab In this subsection we present the frequency responses graphics.
- 
+\tab In this subsection we present the frequency responses graphics. Since both $V_6$ and $V_c$ have its amplitude, and therefore magnitude, dependent of frequency, we can observe that with the frequency increase comes a magnitude decrease of both signals. On the contrary, the amplitude of $V_s$ does not depend on the frequency, and is constant and equal to 1, we can then observe it remains constant and equals to 0, as $log_{10}(1)$=0.
+
+As can be seen in Figure~\ref{fig:theo_ph}, when the frequency increases the phase tends to negative values. It is therefore according to what was to be expected.
+
+\begin{figure}[H] \centering
+\includegraphics[width=0.8\linewidth]{theo_5.eps}
+\caption{Theoretical analysis of magnitude in response to frequency changes.}
+\label{fig:theo_db}
+\end{figure}
+
+\begin{figure}[H] \centering
+\includegraphics[width=0.8\linewidth]{theo_6.eps}
+\caption{Theoretical analysis of phase in response to frequency changes.}
+\label{fig:theo_ph}
+\end{figure} 
+
  %inserir graficos

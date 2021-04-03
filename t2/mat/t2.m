@@ -73,7 +73,7 @@ tab=fopen("point2_tab.tex","w");
 
 fprintf(tab, "@$I_x$ & %f \\\\ \\hline \n", d(9,1))
 fprintf(tab, "$V_x$ & %f \\\\ \\hline \n", Vx)
-fprintf(tab, "$R_eq$ & %f \\\\ \\hline \n", Req)
+fprintf(tab, "$R_{eq}$ & %f \\\\ \\hline \n", Req)
 fclose(tab)
 
 t=0:1e-6:20e-3; %s
@@ -82,7 +82,6 @@ Vc=Vx*exp(-t/(Req*C));
 
 cpic = figure ();
 plot (t*1000, Vc, "g");
-
 
 xlabel ("t[ms]");
 ylabel ("V_c(t) [V]");
@@ -116,7 +115,6 @@ fprintf(tab, "$V_8$ & %f+%fi \\\\ \\hline \n", real(f(8,1)), imag(f(8,1)))
 fclose(tab);
 
 Vt=Vc+abs(f(6,1))*cos(w*t+acos(real(f(6,1))/abs(f(6,1))));
-%%Vt=Vc+abs(f(6,1))*sin(w*t-pi);
 
 Vs=sin(w*t);
 t1=-5e-3:5e-5:0;
@@ -124,36 +122,64 @@ t1=-5e-3:5e-5:0;
 theo_4 = figure ();
 plot (t*1000, Vt, "b");
 hold on;
-plot (t1*1000, Vx, "b");
 plot (t*1000, Vs, "r");
+plot (t1*1000, Vx, "b");
 plot (t1*1000, Va, "r");
 
+legend("V_t","V_s");
 xlabel ("t[ms]");
 ylabel ("V_t(t)/V_s(t) [V]");
 print (theo_4, "theo_4.eps", "-depsc");
 
+
+H = [Kb+1./R2, -1./R2, -Kb, 0;
+     1./R3-Kb,  0, Kb-1./R3-1./R4, -1./R6;
+     Kb-1./R1-1./R3, 0, 1./R3-Kb, 0;
+     0, 0, 1., Kc/R6-R7/R6-1.];
+K = [0; 0; -exp(-j*pi/2)/R1; 0];
+
+h=H\K;
+
 fz=-1:0.1:6
 Zc=1./(j*2*pi*power(10,fz)*C);
-V8 = R7*(1./R1+1./R6)*f(7,1);
-V6 = ((1./R5+Kb)*f(5,1)-Kb*f(3,1)+(V8./Zc))./(1./R5 + 1./Zc);
+V8 = R7*(1./R1+1./R6)*h(4);
+V6 = ((1./R5+Kb)*h(3)-Kb*h(1)+(V8./Zc))./(1./R5 + 1./Zc);
 Vc = V6 - V8;
 Vs = exp(j*pi/2) + 0*(2*pi*power(10,fz));
 
-%%Vc=1./(sqrt(1+(2*pi*fz).^2*Req.^2*C.^2));
-%%Vc=1./(1+j*2*pi*power(10,fz)*C*Req);
-%%Vc=abs(Vc);
-
 
 theo_5 = figure ();
-plot (fz, 20*log10(abs(Vc)), "y");
+plot (fz, 20*log10(abs(Vc)), "g");
 hold on;
 plot (fz, 20*log10(abs(V6)), "b");
 plot (fz, 20*log10(abs(Vs)), "r");
+legend("Vc","V6","Vs");
 xlabel ("log_{10}(f) [Hz]");
 ylabel ("v_c(f), v_6(f), v_s(f) [dB]");
 print (theo_5, "theo_5.eps" ,"-depsc");
 
+V6 = 180/pi*(angle(V6));
 
+for  i=1:length(V6)
+	if(V6(i)<=-90) 
+		V6(i) = V6(i)+180;
+	elseif (V6(i)>=90) 
+		V6(i) = V6(i)-180;
+endif
+endfor
+
+
+theo_6 = figure();
+plot (fz, 180/pi*(angle(Vc)+pi/2), "g");
+hold on;
+plot (fz, V6-90, "b");
+hold on;
+plot (fz, 180/pi*(angle(Vs)-pi/2), "r");
+
+legend("Vc","V6","Vs");
+xlabel ("log_{10}(f) [Hz]");
+ylabel ("Phase v_c(f), v_6(f), v_s(f) [degrees]");
+print (theo_6, "theo_6.eps", "-depsc");
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%Export files to ngspice

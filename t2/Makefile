@@ -4,7 +4,7 @@
 # type "make clean" to delete all generated files
 # ------------------------------------------------------------
 
-number = 95849
+number = 95778
 
 all:	python
 	make -C mat
@@ -19,6 +19,7 @@ clean:
 	make -C mat clean
 	make -C sim clean
 	make -C doc clean
+	@rm -rf *.txt
 
 .PHONY: all clean python
 
