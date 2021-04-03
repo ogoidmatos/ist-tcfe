@@ -1,0 +1,41 @@
+\section{Octave and Ngspice Comparison}
+\label{sec:comparision}
+
+\subsection{Analysis for t$<$0}
+\begin{table}[H]
+	\centering
+  \begin{tabular}{|l|r|}
+    \hline    
+    {\bf Name} & {\bf Value [V]} \\ \hline
+	\input{../mat/volt_tab1}
+  \end{tabular}
+  \begin{tabular}{|l|r|}
+    \hline    
+    {\bf Name} & {\bf Value [A]} \\ \hline
+	\input{../mat/current_tab1}
+  \end{tabular}
+  \begin{tabular}{|l|r|}
+    \hline    
+    {\bf Name} & {\bf Value [A or V]} \\ \hline
+    \input{../sim/op_tab}
+  \end{tabular}
+  \caption{Voltages and currents obtained by node analysis in Octave on the left and by operating point in Ngspice on the right.}
+    \label{tab:comp1}
+\end{table}
+
+\subsection{Natural solution for t$>$0}
+\begin{table}[H]
+  \centering
+  \begin{tabular}{|l|r|}
+    \hline    
+    {\bf Name} & {\bf Value [A], [V], [Ohm]} \\ \hline
+	\input{../mat/point2_tab}
+  \end{tabular}
+  \begin{tabular}{|l|r|}
+    \hline    
+    {\bf Name} & {\bf Value [A or V]} \\ \hline
+    \input{../sim/op_2_tab}
+  \end{tabular}
+  \caption{On the left, results from Octave, and on the right Ngspice. These tables give us the current and voltage between nodes 6 and 8. All the currents and voltages in other nodes/branches are null.}
+  \label{tab:comp2}
+\end{table}
