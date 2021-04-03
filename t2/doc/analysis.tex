@@ -4,7 +4,7 @@
 \tab In this section, the circuit shown in Figure~\ref{fig:circuit} is analysed
 theoretically, through the method of Node Analysis.
 
-\subsection{Node analysis for t<0}
+\subsection{Node analysis for t$<$0}
 \label{subsec:node}
 \tab 
 \begin{equation}
@@ -13,7 +13,7 @@ theoretically, through the method of Node Analysis.
   0 & G_1 & -G_1-G_3-G_2 & G_2 & G_3 & 0 & 0 & 0 \\
   0 & 0 & G_2+K_b & -G_2 & -K_b & 0 & 0 & 0 \\
   0 & 0 & 0 & 0 & 0 & 0 & -G_6-G_7 & G_7 \\
-  0 & 0 & 0 & 0 & 1 & 0 & K_c*G_6 & -1 \\
+  0 & 0 & 0 & 0 & 1 & 0 & K_d*G_6 & -1 \\
   0 & 0 & -K_b & 0 & G_5+K_b & -G_5 & 0 & 0 \\
   1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
   0 & 0 & G_3 & 0 & -G_3-G_4-G_5 & G_5 & G_7 & -G_7
@@ -27,37 +27,37 @@ theoretically, through the method of Node Analysis.
 \end{bmatrix}
 \end{equation}
 
-The results obtained after implementing the KNL in Octave can be seen in Table~\ref{tab:octave_currents}:
+The results obtained after implementing the KNL in Octave can be seen in Tables~\ref{tab:octave_volt1} and \ref{tab:octave_currents1}:
 %inserir tabela
 
 %%%%
-\begin{table}[h]
+\begin{table}[H]
+  \centering
+  \begin{tabular}{|l|r|}
+    \hline    
+    {\bf Name} & {\bf Value [V]} \\ \hline
+	\input{../mat/volt_tab1}
+  \end{tabular}
+  \caption{Voltages obtained in the theoretical analysis in Octave.}
+  \label{tab:octave_volt1}
+\end{table}
+The currents derived from the results of the node analysis are found in Table~\ref{tab:octave_currents1}.
+%inserir tabela
+\begin{table}[H]
   \centering
   \begin{tabular}{|l|r|}
     \hline    
     {\bf Name} & {\bf Value [A]} \\ \hline
-	\input{../mat/current_tab}
+	\input{../mat/current_tab1}
   \end{tabular}
   \caption{Currents obtained in the theoretical analysis in Octave.}
-  \label{tab:octave_currents}
-\end{table}
-The currents derived from the results of the node analysis are:
-%inserir tabela
-\begin{table}[h]
-  \centering
-  \begin{tabular}{|l|r|}
-    \hline    
-    {\bf Name} & {\bf Value [A]} \\ \hline
-	\input{../mat/current_tab}
-  \end{tabular}
-  \caption{Currents obtained in the theoretical analysis in Octave.}
-  \label{tab:octave_currents}
+  \label{tab:octave_currents1}
 \end{table}
 %%%%
 
-\subsection{Node Analysis for t>=0 (Natural solution)}
+\subsection{Node Analysis for t$\geq$0 (Natural solution)}
 \label{subsec:node}
-\tab Here, we made use of Node Analysis to determine the current that passed through the capacitor. By short-circuting the independent voltage source (V_s) and by swapping the capacitor with a voltage source (V_x = V_6 - V_8) we were able to calculate the current that flowed through the capacitor and the equivalent resistance. We short-circuted the independent voltage source because we are using the thevenin/norton theorems to calculate the resistence as seen by the capacitor and we swapped the capacitor with a voltage source as at t = 0 the capacitor begins discharging and it has a voltage of V_x (since it's voltage is at a peak). 
+\tab Here, we made use of Node Analysis to determine the current that passed through the capacitor. By short-circuting the independent voltage source $V_s$ and by swapping the capacitor with a voltage source $V_x$ = $V_6$ - $V_8$ we were able to calculate the current that flowed through the capacitor and the equivalent resistance. We short-circuted the independent voltage source because we are using the thevenin/norton theorems to calculate the resistence as seen by the capacitor and we swapped the capacitor with a voltage source as at t = 0 the capacitor begins discharging and it has a voltage of $V_x$ (since it's voltage is at a peak). 
 Node analysis matrix:
 %Include matrix ----------
 \begin{equation}
@@ -66,7 +66,7 @@ Node analysis matrix:
   0 & G_1 & -G_1-G_3-G_2 & G_2 & G_3 & 0 & 0 & 0 & 0 \\
   0 & 0 & -G_2+K_b & G_2 & -K_b & 0 & 0 & 0 & 0 \\
   0 & 0 & 0 & 0 & 0 & 0 & -G_6-G_7 & G_7 & 0 \\
-  0 & 0 & 0 & 0 & 1 & 0 & K_c*G_6 & -G_7 & 0 \\
+  0 & 0 & 0 & 0 & 1 & 0 & K_d*G_6 & -G_7 & 0 \\
   0 & 0 & K_b & 0 & G_5-K_b & -G_5 & 0 & 0 & 1 \\
   1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
   0 & 0 & G_1 & 0 & G_4 & 0 & G_6 & 0 & 0
@@ -80,31 +80,38 @@ Node analysis matrix:
 \end{bmatrix}
 \end{equation}
 
-
-
-\begin{equation}
-
+\begin{equation}[H]
 R_eq = (V_x / I_x)
-
 \end{equation}
 
-\begin{equation}
-
+\begin{table}[H]
+  \centering
+  \begin{tabular}{|l|r|}
+    \hline    
+    {\bf Name} & {\bf Value [A], [V], [Ohm]} \\ \hline
+	\input{../mat/point2_tab}
+  \end{tabular}
+  \caption{Equivalent current, voltage and resistor obtained in the theoretical analysis in Octave.}
+  \label{tab:octave_tab2}
+\end{table}
+\begin{equation}[H]
 V_n = V_x * exp( -t / (R_eq * C))
-
 \end{equation}
 %inserir resultados
 
-\par
-With the results obtained before we ploted the natural solution in the following graphic:
+With the results obtained before we ploted the natural solution in Figure~\ref{fig:natural}.
 
-%inserir grafico
+\begin{figure}[H] \centering
+		\includegraphics[width=0.8\linewidth]{natural_c.eps}
+		\caption{Natural solution for capacitor.}
+	\label{fig:natural}
+\end{figure}
 
 %ponto 4
 
-\subsection{Node Analysis for t>=0 (Forced solution)}
+\subsection{Node Analysis for t$\geq$0 (Forced solution)}
 
-To determine the forced solution we used a phasor voltage source V_s = 1 V and then we applied the Node analysis (in which C was replaced by its impedance.
+\tab To determine the forced solution we used a phasor voltage source $V_s$ = 1 V and then we applied the Node analysis (in which C was replaced by its impedance.
 
 Node analysis matrix:
 %Include matrix ----------
@@ -114,8 +121,8 @@ Node analysis matrix:
   0 & G_1 & -G_1-G_3-G_2 & G_2 & G_3 & 0 & 0 & 0\\
   0 & 0 & -G_2+K_b & G_2 & -K_b & 0 & 0 & 0 \\
   0 & 0 & 0 & 0 & 0 & 0 & G_6-G_7 & G_7 \\
-  0 & 0 & 0 & 0 & 1 & 0 & K_c*G_6 & -1 \\
-  0 & 0 & K_b & 0 & -G_5+K_b & G_5+Z_c & 0 & -Z_c \\
+  0 & 0 & 0 & 0 & 1 & 0 & K_d*G_6 & -1 \\
+  0 & 0 & K_b & 0 & -G_5+K_b & G_5+1/Z_c & 0 & -1/Z_c \\
   1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
   0 & -G_1 & 0 & 0 & G_4 & 0 & G_6 & 0
 \end{bmatrix}
@@ -128,51 +135,37 @@ Node analysis matrix:
 \end{bmatrix}
 \end{equation}
 
-%inserir tabelas amplitudes complexas DIOOOOOOOOOOOOOOOOOGOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
-% #GO BIG OR GO HOME
-
+\begin{table}[H]
+  \centering
+  \begin{tabular}{|l|r|}
+    \hline    
+    {\bf Name} & {\bf Value [V]} \\ \hline
+	\input{../mat/volt_tab4}
+  \end{tabular}
+  \caption{Complex voltages obtained in the theoretical analysis in Octave.}
+  \label{tab:octave_4}
+\end{table}
 
 \subsection{Final Solution}
 
-The final solution is: 
+\tab The final solution is: 
 
-\begin {equation}
-V_t = V_6 - V_8, for t<0
-\par
-V_t = V_n + abs(v_6) * sen (2 * pi * f * t + acos(Re(v_6) / abs(v_6)), for t>=0 
+\begin {equation}[H]
+V_t = V_6 - V_8, for\;t<0
+\end {equation}
+\begin {equation}[H]
+V_t = V_n + abs(v_6) * sen (2 * pi * f * t + acos(Re(v_6) / abs(v_6))), for\;t>=0
 \end {equation}
 
-\par
-The plot of V_t and V_s is in the following graphic:
+The plot of $V_t$ and $V_s$ is in Figure~\ref{fig:final}.
 
-%inserir grafico diogo
+\begin{figure}[H] \centering
+\includegraphics[width=0.8\linewidth]{theo_4.eps}
+\caption{Final solution for $V_s$ and $V_t$}
+\label{fig:final}
+\end{figure}
 
 \subsection{Frequency responses}
- In this subsection we present the frequency responses graphics.
+\tab In this subsection we present the frequency responses graphics.
  
  %inserir graficos
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

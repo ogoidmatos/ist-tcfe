@@ -1,8 +1,7 @@
 \section{Simulation Analysis}
 \label{sec:simulation}
-\tab
 
-\subsection{Operating Point Analysis for t<0}
+\subsection{Operating Point Analysis for t$<$0}
 \label{subsec:op_analysis}
 
 \tab While using Ngspice we encountered some problems with the use of current-controlled voltage sources. To overcome them, we introduced a dummy 0V voltage source between the resistors 6 and 7.
@@ -13,9 +12,9 @@ under analysis. Compared to the theoretical analysis results, one notices the
 following differences: describe and explain the differences.
 
 %referencias das tabelas 
-Comparing the Tables \ref{tab:octave_currents} and \ref{tab:octave_voltages} with Table~\ref{tab:op}, we see that the difference between the different voltages and currents is apromixametly null.\par
+Comparing the Tables \ref{tab:octave_volt1} and \ref{tab:octave_currents1} with Table~\ref{tab:op}, we see that the difference between the different voltages and currents is apromixametly null.\par
 %tabela
-\begin{table}[h]
+\begin{table}[H]
   \centering
   \begin{tabular}{|l|r|}
     \hline    
@@ -28,41 +27,65 @@ Comparing the Tables \ref{tab:octave_currents} and \ref{tab:octave_voltages} wit
   \label{tab:op}
 \end{table}
 
-\par
-\subsection{Operating Point Analysis for t>0 (natural solution)}
-By short-circuting the independent voltage source (V_s) and by swapping the capacitor with a voltage source (V_x = V_6 - V_8) we were able to calculate the current that flowed through the capacitor and the equivalent resistance. We short-circuted the independent voltage source because we are using the thevenin/norton theorems to calculate the resistence as seen by the capacitor and we swapped the capacitor with a voltage source as at t = 0 the capacitor begins discharging and it has a voltage of V_x (since it's voltage is at a peak).\par
-The current source I_x is:
+\subsection{Operating Point Analysis for t$>$0 (natural solution)}
+\tab By short-circuting the independent voltage source $V_s$ and by swapping the capacitor with a voltage source $V_x$ = $V_6$ - $V_8$ we were able to calculate the current that flowed through the capacitor and the equivalent resistance. We short-circuted the independent voltage source because we are using the thevenin/norton theorems to calculate the resistence as seen by the capacitor and we swapped the capacitor with a voltage source as at t = 0 the capacitor begins discharging and it has a voltage of $V_x$ (since it's voltage is at a peak).\par
+The current source $I_x$ and voltage $V_6$ can be found in table~\ref{tab:op2}.
 
-%inserir valor
+\begin{table}[H]
+  \centering
+  \begin{tabular}{|l|r|}
+    \hline    
+    {\bf Name} & {\bf Value [A or V]} \\ \hline
+    \input{../sim/op_2_tab}
+  \end{tabular}
+  \caption{Operating point of point 2 of the simulation. A variable preceded by @ is of type {\em current}
+    and expressed in Ampere; other variables are of type {\it voltage} and expressed in
+    Volt.}
+  \label{tab:op2}
+\end{table}
 
-\par and the R_eq is:
 
-%inserir valor
+The graphic for the natural solution, $V_6$(t), (using transient analysis) can be seen in Figure~\ref{fig:nat_sol}.
 
-\par 
-
-The graphic for the natural solution, V_6(t), (using transient analysis) is the following:
-
+\begin{figure}[H] \centering
+\includegraphics[width=0.6\linewidth]{../sim/sim_3.pdf}
+\caption{Natural solution for capacitor.}
+\label{fig:nat_sol}
+\end{figure}
 %inserir grafico
 
-\subsection{Operating Point Analysis for t>0 (natural and forced solution)}
-\par
+\subsection{Operating Point Analysis for t$>$0 (natural and forced solution)}
 
-The graphic for the natural and forced responses on V_6(t):
+\tab The graphic for the natural and forced responses on $V_6$(t) and on $V_1$ (voltage source):
 
+\begin{figure}[H] \centering
+\includegraphics[width=0.6\linewidth]{../sim/sim_4.pdf}
+\caption{Forced solution of voltage source and capacitor.}
+\label{fig:nat_for}
+\end{figure}
 %inserir grafico
-\par
 \subsection{Frequency response}
-The graphics for the frequency response are:
+\tab The graphics for the frequency response are seen in Figure~\ref{fig:db} and \ref{fig:ph}.
 
-%inserir graficos
-\par
-V_s and V_6 differ since V_6 is connected to a capacitor and therefore it will be the sum of a natural and a forced solution whilst V_s is just a voltage source. % ver se é preciso comentar aqui qlq cena mais (comparar c outro trabalho)
+\begin{figure}[H] \centering
+\includegraphics[width=0.6\linewidth]{../sim/sim_5_db.pdf}
+\caption{Magnitude in response to frequency changes.}
+\label{fig:db}
+\end{figure}
+
+\begin{figure}[H] \centering
+\includegraphics[width=0.6\linewidth]{../sim/sim_5_ph.pdf}
+\caption{Phase in response to frequency changes.}
+\label{fig:ph}
+\end{figure}
+
+%inserir comentario
+$V_s$ and $V_6$ differ since $V_6$ is connected to a capacitor and therefore it will be the sum of a natural and a forced solution whilst $V_s$ is just a voltage source. % ver se é preciso comentar aqui qlq cena mais (comparar c outro trabalho)
 
 \section{Comparing Octave and Ngspice}
 
-\subsection{Operating Point Analysis for t<0}
-The difference between the results is minimal, as can be seen by comparing the table. The results are equal since the circuit is linear.
+\subsection{Operating Point Analysis for t$<$0}
+\tab The difference between the results is minimal, as can be seen by comparing the table. The results are equal since the circuit is linear.
 
 %inserir tabelas comparativas
 \par
@@ -81,62 +104,3 @@ The graphics are similar, since the circuit is linear and we are using ideal vol
 \subsection{Frequency response}
 
 As one would expect the graphics are very similar and one can't find any significant discrepancies. This is the result of the circuit being linear
-
-%inserir graficos
-
-%rever comentarios aos graficos.
-
-%atualizar indice
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

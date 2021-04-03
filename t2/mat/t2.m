@@ -73,7 +73,7 @@ tab=fopen("point2_tab.tex","w");
 
 fprintf(tab, "@$I_x$ & %f \\\\ \\hline \n", d(9,1))
 fprintf(tab, "$V_x$ & %f \\\\ \\hline \n", Vx)
-fprintf(tab, "$R_e_q$ & %f \\\\ \\hline \n", Req)
+fprintf(tab, "$R_eq$ & %f \\\\ \\hline \n", Req)
 fclose(tab)
 
 t=0:1e-6:20e-3; %s
@@ -96,12 +96,12 @@ F = [1, 0, 0, 0, 0, 0, 0, 0;
 0, 1, 0, 0, 0, 0, 0, 0;
 0, 1/R1, -1/R1-1/R2-1/R3, 1/R2, 1/R3, 0, 0, 0;
 0, 0, 1/R2-Kb, -1/R2, Kb, 0, 0, 0;
-0, 0, Kb, 0, -Kb-1/R5, 1/R5+Zc, 0, -Zc;
+0, 0, Kb, 0, -Kb-1/R5, 1/R5+1/Zc, 0, -1/Zc;
 0, 0, 0, 0, 0, 0, 1/R6-1/R7, 1/R7;
 0, 0, 0, 0, 1, 0, -Kc*1/R6, -1;
 0, -1/R1, 0, 0, 1/R4, 0, 1/R6, 0]
 
-G = [0; exp(j); 0; 0; 0; 0; 0; 0]
+G = [0; exp(-j); 0; 0; 0; 0; 0; 0]
 f=F\G
 
 tab=fopen("volt_tab4.tex","w");
@@ -115,7 +115,7 @@ fprintf(tab, "$V_7$ & %f+%fi \\\\ \\hline \n", real(f(7,1)), imag(f(7,1)))
 fprintf(tab, "$V_8$ & %f+%fi \\\\ \\hline \n", real(f(8,1)), imag(f(8,1)))
 fclose(tab);
 
-Vt=Vc+abs(f(6,1))*sin(w*t+acos(real(f(6,1))/abs(f(6,1))));
+Vt=Vc+abs(f(6,1))*cos(w*t+acos(real(f(6,1))/abs(f(6,1))));
 %%Vt=Vc+abs(f(6,1))*sin(w*t-pi);
 
 Vs=sin(w*t);
@@ -132,8 +132,26 @@ xlabel ("t[ms]");
 ylabel ("V_t(t)/V_s(t) [V]");
 print (theo_4, "theo_4.eps", "-depsc");
 
-%%Vc=f(6,1)-f(8,1)
-%%Vc=abs(Vc)*sin(
+fz=-1:0.1:6
+Zc=1./(j*2*pi*power(10,fz)*C);
+V8 = R7*(1./R1+1./R6)*f(7,1);
+V6 = ((1./R5+Kb)*f(5,1)-Kb*f(3,1)+(V8./Zc))./(1./R5 + 1./Zc);
+Vc = V6 - V8;
+Vs = exp(j*pi/2) + 0*(2*pi*power(10,fz));
+
+%%Vc=1./(sqrt(1+(2*pi*fz).^2*Req.^2*C.^2));
+%%Vc=1./(1+j*2*pi*power(10,fz)*C*Req);
+%%Vc=abs(Vc);
+
+
+theo_5 = figure ();
+plot (fz, 20*log10(abs(Vc)), "y");
+hold on;
+plot (fz, 20*log10(abs(V6)), "b");
+plot (fz, 20*log10(abs(Vs)), "r");
+xlabel ("log_{10}(f) [Hz]");
+ylabel ("v_c(f), v_6(f), v_s(f) [dB]");
+print (theo_5, "theo_5.eps" ,"-depsc");
 
 
 

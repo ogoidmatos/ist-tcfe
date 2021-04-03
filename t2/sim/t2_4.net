@@ -35,10 +35,10 @@ echo  "Frequency analysis"
 echo "********************************************"
 ac dec 100 0.1 100MEG
 
-hardcopy sim_5_db.ps db(v(1)) db(v(6))
+hardcopy sim_5_db.ps db(v(1)) db(v(6)) db(v(6)-v(8))
 echo sim_5_db_FIG
 
-hardcopy sim_5_ph.ps ph(v(1))*180/pi ph(v(6))*180/pi
+hardcopy sim_5_ph.ps ph(v(1))*180/pi ph(v(6))*180/pi ph(v(6)-v(8))*180/pi
 echo sim_5_ph_FIG
 
 
