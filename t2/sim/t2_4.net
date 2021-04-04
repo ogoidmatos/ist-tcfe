@@ -33,7 +33,7 @@ echo sim_4_FIG
 echo "********************************************"
 echo  "Frequency analysis"
 echo "********************************************"
-ac dec 100 0.1 100MEG
+ac dec 100 0.1 1MEG
 
 hardcopy sim_5_db.ps db(v(1)) db(v(6)) db(v(6)-v(8))
 echo sim_5_db_FIG
