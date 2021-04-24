@@ -1,0 +1,87 @@
+\section{Simulation Analysis}
+\label{sec:simulation}
+
+\subsection{Operating Point Analysis for t$<$0}
+\label{subsec:op_analysis}
+
+\tab While using Ngspice we encountered some problems with the use of current-controlled voltage sources. To overcome them, we introduced a dummy 0V voltage source between the resistors 6 and 7.
+The voltage source $V_c$ depends on the current $I_c$, which is the current on $R_6$. However, since Ngspice could not take the current in $R_6$, we introduced the null voltage source, since the current there will be $I_c$, which is the current that $V_c$ depends on.
+
+Table~\ref{tab:op} shows the simulated operating point results for the circuit
+under analysis. Compared to the theoretical analysis results, one notices the
+following differences: describe and explain the differences.
+
+%referencias das tabelas 
+Comparing the Tables \ref{tab:octave_volt1} and \ref{tab:octave_currents1} with Table~\ref{tab:op}, we see that the difference between the different voltages and currents is apromixametly null.\par
+%tabela
+\begin{table}[H]
+  \centering
+  \begin{tabular}{|l|r|}
+    \hline    
+    {\bf Name} & {\bf Value [A or V]} \\ \hline
+    \input{../sim/op_tab}
+  \end{tabular}
+  \caption{Operating point. A variable preceded by @ is of type {\em current}
+    and expressed in Ampere; other variables are of type {\it voltage} and expressed in
+    Volt.}
+  \label{tab:op}
+\end{table}
+
+\subsection{Transient Analysis for t$>$0 (natural solution)}
+\tab By short-circuting the independent voltage source $V_s$ and by swapping the capacitor with a voltage source $V_x$ = $V_6$ - $V_8$ we were able to calculate the current that flowed through the capacitor and the equivalent resistance. We short-circuted the independent voltage source because we are using the thevenin/norton theorems to calculate the resistence as seen by the capacitor and we swapped the capacitor with a voltage source as at t = 0 the capacitor begins discharging and it has a voltage of $V_x$ (since it's voltage is at a peak).\par
+The current source $I_x$ and voltage $V_6$ can be found in table~\ref{tab:op2}.
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{|l|r|}
+    \hline    
+    {\bf Name} & {\bf Value [A or V]} \\ \hline
+    \input{../sim/op_2_tab}
+  \end{tabular}
+  \caption{Operating point of point 2 of the simulation. A variable preceded by @ is of type {\em current}
+    and expressed in Ampere; other variables are of type {\it voltage} and expressed in
+    Volt.}
+  \label{tab:op2}
+\end{table}
+
+
+The graphic for the natural solution, $V_6$(t), (using transient analysis) can be seen in Figure~\ref{fig:nat_sol}.
+
+Comparing Table \ref{tab:octave_tab2} with \ref{tab:op2}, we can see that the difference between current and voltage obtained is nearly null. Moreover, looking at Figures~\ref{fig:natural} and \ref{fig:nat_sol} we can easily observe the similarities between graphics. This points us to the fact that the theorical model used aproximates very well the simulations.
+
+\begin{figure}[H] \centering
+\includegraphics[width=0.6\linewidth]{../sim/sim_3.pdf}
+\caption{Natural solution for capacitor.}
+\label{fig:nat_sol}
+\end{figure}
+%inserir grafico
+\newpage
+\subsection{Transient analysis for t$>$0 (natural and forced solution)}
+
+\tab The graphic for the natural and forced responses on $V_6$(t) and on $V_1$ (voltage source) can be observed in Figure~\ref{fig:ph}. Once again, we can conclude that the natural response of the capacitor tends to fade, while the forced response starts to prevail. At the end of the period in study, we can observe that capacitor has a difference of Pi in phase with the voltage source.
+
+Comparing Figure~\ref{fig:final} and Figure~\ref{fig:nat_for}, from Octave and Ngspice respectively, we can observe that the results are identical, which is to be expected, since the circuit is composed by linear components only.
+
+\begin{figure}[H] \centering
+\includegraphics[width=0.6\linewidth]{../sim/sim_4.pdf}
+\caption{Forced solution of voltage source and capacitor.}
+\label{fig:nat_for}
+\end{figure}
+%inserir grafico
+\subsection{Frequency response}
+\tab The graphics for the frequency response are seen in Figure~\ref{fig:db} and \ref{fig:ph}. As can be seen in the graph, $V_c$'s magnitude is constant, since it is independent from the frequency. $V_c$ and $V_6$ are dependent of the frequency and this leads $V_c$ to 0, since $V_c$ is inversely proporcional to the frequency.
+Octave's (Figure~\ref{fig:theo_db}) and ngspice's (Figure~\ref{fig:db}) graphs are similiar. Since the circuit is linear, this was expected, so it can be concluded that the model used is a very good aproximation. Once again, we can observe that the phase drops when the frequency increases, pointing out the very similar results in Figure~\ref{fig:theo_ph} and Figure~\ref{fig:ph}.
+
+\begin{figure}[H] \centering
+\includegraphics[width=0.6\linewidth]{../sim/sim_5_db.pdf}
+\caption{Magnitude in response to frequency changes.}
+\label{fig:db}
+\end{figure}
+
+\begin{figure}[H] \centering
+\includegraphics[width=0.6\linewidth]{../sim/sim_5_ph.pdf}
+\caption{Phase in response to frequency changes.}
+\label{fig:ph}
+\end{figure}
+
+\newpage

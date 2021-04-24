@@ -1,0 +1,187 @@
+\section{Theoretical Analysis}
+\label{sec:analysis}
+
+\tab In this section, the circuit shown in Figure~\ref{fig:circuit} is analysed
+theoretically, through the method of Node Analysis.
+
+\subsection{Node analysis for t$<$0}
+\label{subsec:node}
+\tab 
+\begin{equation}
+\begin{bmatrix}
+  0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 \\
+  0 & G_1 & -G_1-G_3-G_2 & G_2 & G_3 & 0 & 0 & 0 \\
+  0 & 0 & G_2+K_b & -G_2 & -K_b & 0 & 0 & 0 \\
+  0 & 0 & 0 & 0 & 0 & 0 & -G_6-G_7 & G_7 \\
+  0 & 0 & 0 & 0 & 1 & 0 & K_d*G_6 & -1 \\
+  0 & 0 & -K_b & 0 & G_5+K_b & -G_5 & 0 & 0 \\
+  1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+  0 & 0 & G_3 & 0 & -G_3-G_4-G_5 & G_5 & G_7 & -G_7
+\end{bmatrix}
+\begin{bmatrix}
+  V_0 \\ V_1 \\ V_2 \\ V_3 \\ V_5 \\ V_6 \\ V_7 \\ V_8
+\end{bmatrix}
+=
+\begin{bmatrix}
+  V_s \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0
+\end{bmatrix}
+\end{equation}
+
+The results obtained after implementing the KNL in Octave can be seen in Tables~\ref{tab:octave_volt1} and \ref{tab:octave_currents1}:
+%inserir tabela
+
+%%%%
+\begin{table}[H]
+  \centering
+  \begin{tabular}{|l|r|}
+    \hline    
+    {\bf Name} & {\bf Value [V]} \\ \hline
+	\input{../mat/volt_tab1}
+  \end{tabular}
+  \caption{Voltages obtained in the theoretical analysis in Octave.}
+  \label{tab:octave_volt1}
+\end{table}
+The currents derived from the results of the node analysis are found in Table~\ref{tab:octave_currents1}.
+%inserir tabela
+\begin{table}[H]
+  \centering
+  \begin{tabular}{|l|r|}
+    \hline    
+    {\bf Name} & {\bf Value [A]} \\ \hline
+	\input{../mat/current_tab1}
+  \end{tabular}
+  \caption{Currents obtained in the theoretical analysis in Octave.}
+  \label{tab:octave_currents1}
+\end{table}
+%%%%
+
+\subsection{Node Analysis for t$\geq$0 (Natural solution)}
+\label{subsec:node}
+\tab Here, we made use of Node Analysis to determine the current that passed through the capacitor. By short-circuting the independent voltage source $V_s$ and by swapping the capacitor with a voltage source $V_x$ = $V_6$ - $V_8$ we were able to calculate the current that flowed through the capacitor and the equivalent resistance. We short-circuted the independent voltage source because we are using the thevenin/norton theorems to calculate the resistence as seen by the capacitor and we swapped the capacitor with a voltage source as at t = 0 the capacitor begins discharging and it has a voltage of $V_x$ (since it's voltage is at a peak). 
+Node analysis matrix:
+%Include matrix ----------
+\begin{equation}
+\begin{bmatrix}
+  0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+  0 & G_1 & -G_1-G_3-G_2 & G_2 & G_3 & 0 & 0 & 0 & 0 \\
+  0 & 0 & -G_2+K_b & G_2 & -K_b & 0 & 0 & 0 & 0 \\
+  0 & 0 & 0 & 0 & 0 & 0 & -G_6-G_7 & G_7 & 0 \\
+  0 & 0 & 0 & 0 & 1 & 0 & K_d*G_6 & -G_7 & 0 \\
+  0 & 0 & K_b & 0 & G_5-K_b & -G_5 & 0 & 0 & 1 \\
+  1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+  0 & 0 & G_1 & 0 & G_4 & 0 & G_6 & 0 & 0
+\end{bmatrix}
+\begin{bmatrix}
+  V_0 \\ V_1 \\ V_2 \\ V_3 \\ V_5 \\ V_6 \\ V_7 \\ V_8 \\ I_x
+\end{bmatrix}
+=
+\begin{bmatrix}
+  0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ Vx \\ 0 \\ 0
+\end{bmatrix}
+\end{equation}
+
+\begin{equation}
+R_eq = (V_x / I_x)
+\end{equation}
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{|l|r|}
+    \hline    
+    {\bf Name} & {\bf Value [A], [V], [Ohm]} \\ \hline
+	\input{../mat/point2_tab}
+  \end{tabular}
+  \caption{Equivalent current, voltage and resistor obtained in the theoretical analysis in Octave.}
+  \label{tab:octave_tab2}
+\end{table}
+\begin{equation}
+V_n = V_x * exp( -t / (R_eq * C))
+\end{equation}
+%inserir resultados
+
+With the results obtained before we ploted the natural solution in Figure~\ref{fig:natural}.
+
+\begin{figure}[H] \centering
+	\includegraphics[width=0.8\linewidth]{natural_c.eps}
+	\caption{Natural solution for capacitor.}
+	\label{fig:natural}
+\end{figure}
+
+%ponto 4
+\newpage
+\subsection{Node Analysis for t$\geq$0 (Forced solution)}
+
+\tab To determine the forced solution we used a phasor voltage source $V_s$ = 1 V and then we applied the Node analysis (in which C was replaced by its impedance).
+
+Node analysis matrix:
+%Include matrix ----------
+\begin{equation}
+\begin{bmatrix}
+  0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 \\
+  0 & G_1 & -G_1-G_3-G_2 & G_2 & G_3 & 0 & 0 & 0\\
+  0 & 0 & -G_2+K_b & G_2 & -K_b & 0 & 0 & 0 \\
+  0 & 0 & 0 & 0 & 0 & 0 & G_6-G_7 & G_7 \\
+  0 & 0 & 0 & 0 & 1 & 0 & K_d*G_6 & -1 \\
+  0 & 0 & K_b & 0 & -G_5+K_b & G_5+1/Z_c & 0 & -1/Z_c \\
+  1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+  0 & -G_1 & 0 & 0 & G_4 & 0 & G_6 & 0
+\end{bmatrix}
+\begin{bmatrix}
+  V_0 \\ V_1 \\ V_2 \\ V_3 \\ V_5 \\ V_6 \\ V_7 \\ V_8 
+\end{bmatrix}
+=
+\begin{bmatrix}
+  0 \\ exp(-j) \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0
+\end{bmatrix}
+\end{equation}
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{|l|r|}
+    \hline    
+    {\bf Name} & {\bf Value [V]} \\ \hline
+	\input{../mat/volt_tab4}
+  \end{tabular}
+  \caption{Complex voltages obtained in the theoretical analysis in Octave.}
+  \label{tab:octave_4}
+\end{table}
+\newpage
+\subsection{Final Solution}
+
+\tab The final solution is: 
+
+\begin {equation}
+V_t = V_6 - V_8, for\;t<0
+\end {equation}
+\begin {equation}
+V_t = V_n + abs(v_6) * cos(2 * pi * f * t + acos(Re(v_6) / abs(v_6))), for\;t>=0
+\end {equation}
+
+The plot of $V_t$ and $V_s$ is in Figure~\ref{fig:final}.
+
+\begin{figure}[H] \centering
+\includegraphics[width=0.8\linewidth]{theo_4.eps}
+\caption{Final solution for $V_s$ and $V_t$}
+\label{fig:final}
+\end{figure}
+
+Here, the model used is one in which, as can be seen in Figure~\ref{fig:final}, the natural solution of the capacitor tends to diminish into the forced solution given by the sinusoidal excitation of the voltage source $V_s$. Finally, at the end of the period studied (t=20ms),it can be observed that the phase of the voltage on the capacitor differs Pi from the phase of voltage source. 
+
+\subsection{Frequency responses}
+\tab In this subsection we present the frequency responses graphics. Since both $V_6$ and $V_c$ have its amplitude, and therefore magnitude, dependent of frequency, we can observe that with the frequency increase comes a magnitude decrease of both signals. On the contrary, the amplitude of $V_s$ does not depend on the frequency, and is constant and equal to 1, we can then observe it remains constant and equals to 0, as $log_{10}(1)$=0.
+
+As can be seen in Figure~\ref{fig:theo_ph}, when the frequency increases the phase tends to negative values. It is therefore according to what was to be expected.
+
+\begin{figure}[H] \centering
+\includegraphics[width=0.8\linewidth]{theo_5.eps}
+\caption{Theoretical analysis of magnitude in response to frequency changes.}
+\label{fig:theo_db}
+\end{figure}
+
+\begin{figure}[H] \centering
+\includegraphics[width=0.8\linewidth]{theo_6.eps}
+\caption{Theoretical analysis of phase in response to frequency changes.}
+\label{fig:theo_ph}
+\end{figure} 
+
+ %inserir graficos
