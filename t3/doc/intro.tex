@@ -2,8 +2,9 @@
 \label{sec:introduction}
 
 % state the learning objective 
-\tab The objective of this laboratory assignment is to study a circuit containing a dependent voltage source ($V_c$) and independent ($I_d$, $V_a$) current and voltage sources, connected to resistors ($R_1$ to $R_7$) and to a capacitor ($C$).
+\tab The objective of this laboratory assignment is to design a AC DC converter keeping in mind that it must be cost efficient.
 The circuit and its organization can be seen in Figure~\ref{fig:circuit}.
+The values used in this circuit for the resistors and capacitor can be found in Table~\ref{tab:values}.
 
 In Section~\ref{sec:analysis}, a theoretical analysis of the circuit is
 presented. In Section~\ref{sec:simulation}, the circuit is analysed by
@@ -17,3 +18,15 @@ Section~\ref{sec:conclusion}.
 \label{fig:circuit}
 \end{figure}
 
+\begin{table}[H]
+  \centering
+  \begin{tabular}{|l|r|}
+    \hline    
+    {\bf Name} & {\bf Value [Ohm/F]} \\ \hline
+    $R_env$ & 70k \\ \hline
+    $R_reg$ & 6.08k \\ \hline
+    $C_env$ & 354u \\ \hline	
+  \end{tabular}
+  \caption{Resistor and Capacitor values used in the circuit.}
+  \label{tab:values}
+\end{table}

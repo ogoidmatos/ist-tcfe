@@ -1,0 +1,84 @@
+Laboratório 3
+* NGSPICE simulation script
+* BJT amp with feedback
+*
+
+* forces current values to be saved
+.options savecurrents
+
+Vin 1 0 sin(0 23 50 0 0)
+
+D1 1 2 Default
+D2 0 2 Default
+D3 3 1 Default
+D4 3 0 Default
+
+Ce 2 3 354u
+
+Re 2 3 70k
+
+Rv 2 4 6.08k
+
+D5 4 5 Default
+D6 5 6 Default
+D7 6 7 Default
+D8 7 8 Default
+D9 8 9 Default
+D10 9 10 Default
+D11 10 11 Default
+D12 11 12 Default
+D13 12 13 Default
+D14 13 14 Default
+D15 14 15 Default
+D16 15 16 Default
+D17 16 17 Default
+D18 17 18 Default
+D19 18 19 Default
+D20 19 20 Default
+D21 20 21 Default
+D22 21 3 Default
+
+
+.model Default D
+.control
+
+op
+
+*makes plots in color
+set hcopypscolor=0
+set color0=white
+set color1=black
+set color2=red
+set color3=blue
+set color4=violet
+set color5=rgb:3/8/0
+set color6=rgb:4/0/0
+
+
+echo "********************************************"
+echo  "Transient Analysis"
+echo "********************************************"
+
+tran 0.0005 0.14 0.04
+
+
+echo  "op_TAB"
+print {maximum(v(4)-v(3))-minimum(v(4)-v(3))}
+print mean(v(4)-v(3))
+echo  "op_END"
+
+
+hardcopy spice1.ps {v(2)-v(3)}
+echo spice1_FIG
+
+hardcopy spice2.ps {v(4)-v(3)}
+echo spice2_FIG
+
+hardcopy spice3.ps {v(4)-v(3)-12}
+echo spice3_FIG
+
+quit
+.endc
+
+.end
+
