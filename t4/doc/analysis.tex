@@ -1,0 +1,43 @@
+\section{Theoretical Analysis}
+\label{sec:analysis}
+\tab In this section, the circuit shown in Figure~\ref{fig:circuit} is analysed theoretically.
+
+Firstly, we use an envelope detecter composed of a full wave rectifier, a resistor and a condensor to convert the AC signal to a DC signal (by using a full wave rectifier instead of a half wave rectifier we ensure that the voltage ripple is smaller).
+Here the model used for the envelope detector is different from the one used in Ngspice, as, for converting the alternate current, we obtain the absolute value of the current, instead of using diodes to process this, contrary to the circuit in Ngspice.
+
+Afterwards, with the use of a voltage regulator made of a resistor and 18 diodes in series, we decrease the ripple and ajust the voltage to the wanted value. On the other hand, here we used an more approximate diode model with the expressions presented in lecture 14.
+
+Below are presented the graphics for the results obtained. In Figure~\ref{fig:theo1} it can be observed the voltage after the full-wave rectifier and on the terminals of the envelop circuit.
+
+\begin{figure}[H] \centering
+\includegraphics[width=0.6\linewidth]{theo1.eps}
+\caption{Voltage in the terminals of the full-wave rectifier and the envelope detector.}
+\label{fig:theo1}
+\end{figure}
+
+In Figure~\ref{fig:theo2} it can be observed the voltage in the terminals of voltage regulator circuit, which, as we can observe, the output voltage is very close to 12V and with very reduced ripple. This allows us to conclude that objective of the cicuit has been achieved. These can be further confirmed by looking at the ripple and average voltages, and the merit obtained in Table~\ref{tab:merit}.
+
+\begin{figure}[H] \centering
+\includegraphics[width=0.6\linewidth]{theo2.eps}
+\caption{Voltage in the terminals of voltage regulator cicuit.}
+\label{fig:theo2}
+\end{figure}
+
+\begin{figure}[H] \centering
+\includegraphics[width=0.6\linewidth]{theo3.eps}
+\caption{Output voltage - 12V : AC voltage oscilation of output voltage.}
+\label{fig:theo3}
+\end{figure}
+
+Finally, in Table~\ref{tab:merit} we can observe the merit, the average DC output and the output voltage ripple.
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{|l|r|}
+    \hline    
+    {\bf Name} & {\bf Value} \\ \hline
+	\input{../mat/merit_tab}
+  \end{tabular}
+  \caption{Average voltage, ripple, cost and merit of the circuit developed in Octave.}
+  \label{tab:merit}
+\end{table}

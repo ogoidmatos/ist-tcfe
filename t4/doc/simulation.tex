@@ -1,0 +1,38 @@
+\section{Simulation Analysis}
+\label{sec:simulation}
+In this section, we will show the results of the Ngspice simulation. Here the results were obtained with the complex default diode model used in the program, eventually leading to small discrepancies from the theoretical methods.
+
+Below are presented the graphics for the results obtained. In Figure~\ref{fig:sim1} it can be observed the voltage on the terminals of the envelop circuit.
+
+\begin{figure}[H] \centering
+\includegraphics[width=0.5\linewidth]{spice1.eps}
+\caption{Voltage in the terminals of the envelope detector.}
+\label{fig:sim1}
+\end{figure}
+
+In Figure~\ref{fig:sim2} it can be observed the voltage in the terminals of voltage regulator circuit, which, as we can observe once again, the output voltage is very close to 12V and with very reduced ripple, similarly to the results obtained in Octave.
+
+\begin{figure}[H] \centering
+\includegraphics[width=0.5\linewidth]{spice2.eps}
+\caption{Output voltage of the circuit.}
+\label{fig:sim2}
+\end{figure}
+
+\begin{figure}[H] \centering
+\includegraphics[width=0.5\linewidth]{spice3.eps}
+\caption{Output voltage - 12V : AC voltage oscilation of output voltage.}
+\label{fig:sim3}
+\end{figure}
+
+The Table~\ref{tab:merit_spice} shows the average DC output and the output voltage ripple. Comparing the Table \ref{tab:merit} with \ref{tab:merit_spice}, we see that the difference between the output voltage is null and the difference between the output ripples is justified by the different models employed (Ngspice's model being more accurate).
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{|l|r|}
+    \hline    
+    {\bf Name} & {\bf Value} \\ \hline
+	\input{../sim/op_tab}
+  \end{tabular}
+  \caption{Average voltage and ripple of the circuit developed in Ngspice.}
+  \label{tab:merit_spice}
+\end{table}
