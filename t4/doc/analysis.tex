@@ -2,20 +2,39 @@
 \label{sec:analysis}
 \tab In this section, the circuit shown in Figure~\ref{fig:circuit} is analysed theoretically.
 
-Firstly, we use an envelope detecter composed of a full wave rectifier, a resistor and a condensor to convert the AC signal to a DC signal (by using a full wave rectifier instead of a half wave rectifier we ensure that the voltage ripple is smaller).
-Here the model used for the envelope detector is different from the one used in Ngspice, as, for converting the alternate current, we obtain the absolute value of the current, instead of using diodes to process this, contrary to the circuit in Ngspice.
+This circuit is divided in two diferent stages: a gain stage and an output stage. Firstly, the gain stage a cicuit similar to the one in page 5 of the slides of class L17, where it was also introduced a condensator in paralel with resistor Re, between the emitor node and the ground node. This stage of the circuit includes a bias circuit, responsible by making sure that the transistor is operating in the forward active region, and a coupling capacitor that blocks the DC component of the audio input.
 
-Afterwards, with the use of a voltage regulator made of a resistor and 18 diodes in series, we decrease the ripple and ajust the voltage to the wanted value. On the other hand, here we used an more approximate diode model with the expressions presented in lecture 14.
+On the other hand, in the output stage of the circuit we have a circuit similar to the one in page 14. This one is then responsible for lowering the output impedance so values compatible with the load (8 Ohm Speaker), which is going to be placed in series with another coupling capacitor on the Vo terminals of the circuit shown.
 
-Below are presented the graphics for the results obtained. In Figure~\ref{fig:theo1} it can be observed the voltage after the full-wave rectifier and on the terminals of the envelop circuit.
+After constructing the theorical model of the circuit we now make use of Operating Point analysis to compute the gain, input and output impedances separately for both stages of the circuit. This analysis was done with resource to the many equations provided by the slides and by the professor.
 
-\begin{figure}[H] \centering
-\includegraphics[width=0.6\linewidth]{theo1.eps}
-\caption{Voltage in the terminals of the full-wave rectifier and the envelope detector.}
-\label{fig:theo1}
-\end{figure}
+Finally, we proceeded to do the frequency response analysis of the cicuit, where we obtained Figure~\ref{XXXXXX} by computing the gain $V_o(f)$/$V_i(f)$.
 
-In Figure~\ref{fig:theo2} it can be observed the voltage in the terminals of voltage regulator circuit, which, as we can observe, the output voltage is very close to 12V and with very reduced ripple. This allows us to conclude that objective of the cicuit has been achieved. These can be further confirmed by looking at the ripple and average voltages, and the merit obtained in Table~\ref{tab:merit}.
+Below we can observe the values desired for both stages of the cicuit, respectively, Gain Stage in Table~\ref{tab:gain} and Output Stage in Table~\ref{tab:output}.
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{|l|r|}
+    \hline    
+    {\bf Name} & {\bf Value [Ohm]} \\ \hline
+	\input{../mat/gain}
+  \end{tabular}
+  \caption{Gain, input and output Impedances of the Gain Stage cicuit.}
+  \label{tab:gain}
+\end{table}
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{|l|r|}
+    \hline    
+    {\bf Name} & {\bf Value [Ohm]} \\ \hline
+	\input{../mat/output}
+  \end{tabular}
+  \caption{Gain, input and output Impedances of the Output Stage cicuit.}
+  \label{tab:output}
+\end{table}
+
+%%Introduzir grafico da frequency analysis
 
 \begin{figure}[H] \centering
 \includegraphics[width=0.6\linewidth]{theo2.eps}
@@ -23,21 +42,15 @@ In Figure~\ref{fig:theo2} it can be observed the voltage in the terminals of vol
 \label{fig:theo2}
 \end{figure}
 
-\begin{figure}[H] \centering
-\includegraphics[width=0.6\linewidth]{theo3.eps}
-\caption{Output voltage - 12V : AC voltage oscilation of output voltage.}
-\label{fig:theo3}
-\end{figure}
-
-Finally, in Table~\ref{tab:merit} we can observe the merit, the average DC output and the output voltage ripple.
+Finally, in Table~\ref{tab:merit} we can observe the merit, the voltage gain, the bandwidth and the lower Cutoff Frequency.
 
 \begin{table}[H]
   \centering
   \begin{tabular}{|l|r|}
     \hline    
     {\bf Name} & {\bf Value} \\ \hline
-	\input{../mat/merit_tab}
+	\input{../mat/merit}
   \end{tabular}
-  \caption{Average voltage, ripple, cost and merit of the circuit developed in Octave.}
+  \caption{Voltage gain, bandwidth, lower Cutoff Frequency and merit of the circuit developed in Octave.}
   \label{tab:merit}
 \end{table}
