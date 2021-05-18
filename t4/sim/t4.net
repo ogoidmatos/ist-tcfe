@@ -61,10 +61,44 @@ hardcopy vo1f.ps vdb(coll)
 
 plot vdb(out)
 plot vp(out)
-hardcopy vo2f.ps vdb(coll)
+hardcopy vo2f.ps vdb(out)
+
+meas AC maximo MAX vdb(out) from=10 to=100MEG
+let range = maximo - 3
+
+meas AC inf WHEN vdb(out) = range
+meas AC sup WHEN vdb(out) = range CROSS=LAST
+
+let bandwidth = sup-inf
+let gain = maximo
+let CO_Freq= inf
+let qualidade = bandwidth*gain/CO_Freq
+
+echo "spice_results_TAB"
+echo "V_Gain=$&gain"
+echo "Bandwidth=$&bandwidth"
+echo "CO_Freq= $&CO_Freq"
+echo "spice_results_END"
+
+
 
 *input impedance in kohm
-print v(in2)[40]/(v(in)[40]-v(in2)[40])/100*1000
+let zin = v(in2)[40]/(v(in)[40]-v(in2)[40])/100*1000
+
+echo "op_in_TAB"
+echo "Zin = $&zin k"
+echo "op_in_END"
+
+let custo = 5
+let merito = qualidade/custo
+
+
+echo "merito_TAB"
+echo "Cost = $&custo"
+echo "Quality = $&qualidade"
+echo "Merit = $&merito"
+echo "merito_END"
+
 
 *need a different setup to measure output impedance
 
