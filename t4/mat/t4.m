@@ -11,6 +11,9 @@ RB2=20000;
 VBEON=0.7;
 VCC=12;
 RS=100;
+c1 = 0.001;
+c2 = 0.001;
+c3 = 10^-6;
 
 RB=1/(1/RB1+1/RB2);
 VEQ=RB2/(RB1+RB2)*VCC;
@@ -73,6 +76,61 @@ AV2 = gm2/(gm2+gpi2+go2+ge2);
 ZI2 = (gm2+gpi2+go2+ge2)/gpi2/(gpi2+go2+ge2);
 
 ZO2 = 1/(gm2+gpi2+go2+ge2);
+
+
+vin=0.01;
+Rpi2 = 1/ gpi2;
+Ro2 = 1 / go2;
+Load=8;
+
+
+%Ib Ic Id Ie
+for t=1:0.1:8
+
+	Zc1 = 1 ./(j* power(10,t) * 2 * pi * c1);
+	Zc2 = 1 ./(j* power(10,t) * 2 * pi * c2);
+
+	A = [RS + Zc1 + RB + rpi1 + RE1, 0, 0, -RE1;
+	-RE1, 0, -Zc2, RE1 + Zc2;
+	gm1 * rpi1, 1, 0, 0;
+	0, -ro1, ro1 + RC1 + Zc2, -Zc2]; 
+
+	B = [vin; 0; 0; 0];
+	x=A\B;
+
+	gain = - x(3) * RC1 / vin; 
+
+	Vin2 = x(3) * RC1;
+
+	%Ib Ic Id
+
+	Zc3 = 1 ./(j* power(10,t) * 2 * pi * c3);
+
+	C = [Rpi2 + RE2, 0, -RE2;
+	-gm2 * Rpi2, 1, 0;
+	-RE2, -Ro2, RE2 + Ro2 + Zc3 + Load];
+
+	D = [Vin2; 0; 0];
+
+	y= C\D;
+
+	gain2 = (y(3)-y(1)) * RE2 / Vin2;
+
+	%Ib Ic Id Ie
+
+	E = [ rpi1 + RE1, 0, 0, -RE1;
+	-RE1, 0, -Zc3 - Load, RE1 + Zc2 + Load;
+	gm1 * rpi1, 1, 0, 0;
+	0, -ro1, ro1+ Load + Zc3, -Zc3 - Load]; 
+
+	F = [Vin2; 0; 0; 0];
+	z=E\F;
+
+	gain3 = (z(4)-z(1)) * RE2 / Vin2;
+endfor
+
+
+
 
 
 tab=fopen("output.tex","w");
