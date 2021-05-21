@@ -3,16 +3,16 @@
 VT=25e-3
 BFN=178.7
 VAFN=69.7
-RE1=100
-RC1=1000
-RB1=80000
-RB2=20000
+RE1=137
+RC1=500
+RB1=100000
+RB2=10000
 VBEON=0.7
 VCC=12
 RS=100
-c1 = 0.001;
-c2 = 0.001;
-c3 = 10^-6;
+c1 = 15e-6;
+c2 = 83e-6;
+c3 = 30e-6;
 
 
 RB=1/(1/RB1+1/RB2);
@@ -42,7 +42,7 @@ AV1_DB = 20*log10(abs(AV1));
 AV1simple =  - RSB/RS * gm1*RC1/(1+gm1*RE1);
 AV1simple_DB = 20*log10(abs(AV1simple));
 
-RE1=100
+RE1=137
 ZI1 = 1/(1/RB+1/(((ro1+RC1+RE1)*(rpi1+RE1)+gm1*RE1*ro1*rpi1 - RE1^2)/(ro1+RC1+RE1)));
 
 ZX = ro1*(1/RE1+1/(rpi1+RSB)+1/ro1+gm1*rpi1/(rpi1+RSB))/(1/RE1+1/(rpi1+RSB));
@@ -102,7 +102,7 @@ fprintf(tab, "Input Impedance & %f \\\\ \\hline \n", ZI);
 fprintf(tab, "Output Impedance & %f \\\\ \\hline \n", ZO);
 
 fclose(tab);
-RE1=100;
+RE1=137;
 vin=0.01;
 Rpi2 = 1/ gpi2;
 Ro2 = 1 / go2;
@@ -132,9 +132,9 @@ for t=1:0.1:8
 	B=[vin;0;0;0;0;0;0];
 	
 	X=A\B;
+	Vout=(X(7)-X(5))*Zeq;
 	
-	
-	gain(i)=(X(7)-X(5))*Zeq/vin;
+	gain(i)=Vout*Load/(Load+Zc3)/vin;
 	gain_DB(i)=20*log10(abs(gain(i)));
 	i=i+1;
 endfor

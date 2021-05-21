@@ -7,21 +7,21 @@
 Vcc vcc 0 12.0
 Vin in 0 0 ac 1.0 sin(0 10m 1k)
 Rin in in2 100
-
+ 
 * input coupling capacitor
-Ci in2 base 1m
+Ci in2 base 15u
 
 * bias circuit
-R1 vcc base 80k
-R2 base 0 20k
+R1 vcc base 100k
+R2 base 0 10k
 
 * gain stage
 Q1 coll base emit BC547A
-Rc vcc coll 1k
-Re emit 0 100
+Rc vcc coll 500
+Re emit 0 137
 
 * bypass capacitor
-Cb emit 0 1m
+Cb emit 0 83u
 
 
 * output stage
@@ -29,7 +29,7 @@ Q2 0 coll emit2 BC557A
 Rout emit2 vcc 100
 
 * output coupling capacitor
-Co emit2 out 1u
+Co emit2 out 30u
 
 * load
 RL out 0 8
@@ -91,7 +91,7 @@ echo "op_in_END"
 
 plot abs(v(in2)[40]/vin#branch[40]/(-1000))
 
-let custo = 5
+let custo = 238.837
 let merito = qualidade/custo
 
 
