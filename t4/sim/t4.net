@@ -83,11 +83,13 @@ echo "spice_results_END"
 
 
 *input impedance in kohm
-let zin = v(in2)[40]/(v(in)[40]-v(in2)[40])/100*1000
+let zin = -v(in2)[40]/vin#branch[40]
 
 echo "op_in_TAB"
-echo "Zin = $&zin k"
+echo "Zin = $&zin"
 echo "op_in_END"
+
+plot abs(v(in2)[40]/vin#branch[40]/(-1000))
 
 let custo = 5
 let merito = qualidade/custo
