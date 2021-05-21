@@ -117,23 +117,25 @@ for t=1:0.1:8
 	Zc2 = 1 ./(j*w*c2);
 	Zc3 = 1 ./(j*w*c3);
 	ZRe_C1=1/(1/RE1+1/Zc2);
-	ZRe2_Ro2=1/(1/Ro2+1/RE2);
+	%ZRe2_Ro2=1/(1/Ro2+1/RE2);
+	Zeq=1/(1/RE2+1/(Load+Zc3));
 	
 	A=[RS+Zc1+RB,-RB,0,0,0,0,0;
 	-RB,RB+rpi1+ZRe_C1,0,-ZRe_C1,0,0,0;
 	0,rpi1*gm1,1,0,0,0,0;
 	0,-ZRe_C1,-ro1,ZRe_C1+ro1+RC1,-RC1,0,0;
-	0,0,0,-RC1,Rpi2+RC1,ZRe2_Ro2,-ZRe2_Ro2;
-	0,0,0,0,-1-Rpi2*gm2,1,0;
-	0,0,0,0,0,-ZRe2_Ro2,ZRe2_Ro2+Load+Zc3;
+	0,0,0,-RC1,Rpi2+RC1+Zeq,0,-Zeq;
+	0,0,0,0,Rpi2*gm2,1,0;
+	0,0,0,0,-Zeq,-Ro2,Zeq+Ro2;
 	];
 
 	B=[vin;0;0;0;0;0;0];
 	
 	X=A\B;
 	
-	gain(i)=X(7)*Load/vin;
-	gain_DB(i)=20*log10(abs(X(7)*Load/vin));
+	
+	gain(i)=(X(7)-X(5))*Zeq/vin;
+	gain_DB(i)=20*log10(abs(gain(i)));
 	i=i+1;
 endfor
 
