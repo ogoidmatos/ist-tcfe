@@ -41,14 +41,16 @@ RL out 0 8
 op
 echo "op_TAB"
 print v(coll)-v(emit)
+print v(base)-v(emit)
+print v(emit2)
 print v(emit2)-v(coll)
 echo "op_END"
 
 
 * time analysis
-tran 1e-5 1e-2
-plot v(coll)
-hardcopy vo1.ps vdb(coll)
+*tran 1e-5 1e-2
+*plot v(coll)
+*hardcopy vo1.ps vdb(coll)
 
 
 * frequency analysis
