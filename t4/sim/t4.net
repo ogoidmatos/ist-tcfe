@@ -9,27 +9,27 @@ Vin in 0 0 ac 1.0 sin(0 10m 1k)
 Rin in in2 100
  
 * input coupling capacitor
-Ci in2 base 15u
+Ci in2 base 16.25u
 
 * bias circuit
-R1 vcc base 100k
-R2 base 0 10k
+R1 vcc base 85k
+R2 base 0 20k
 
 * gain stage
 Q1 coll base emit BC547A
-Rc vcc coll 500
-Re emit 0 137
+Rc vcc coll 700
+Re emit 0 200
 
 * bypass capacitor
-Cb emit 0 83u
+Cb emit 0 5m
 
 
 * output stage
 Q2 0 coll emit2 BC557A
-Rout emit2 vcc 100
+Rout emit2 vcc 200
 
 * output coupling capacitor
-Co emit2 out 30u
+Co emit2 out 3m
 
 * load
 RL out 0 8
@@ -64,6 +64,7 @@ hardcopy vo1f.ps vdb(coll)
 plot vdb(out)
 plot vp(out)
 hardcopy vo2f.ps vdb(out)
+echo vo2f_FIG
 
 meas AC maximo MAX vdb(out) from=10 to=100MEG
 let range = maximo - 3
@@ -72,14 +73,16 @@ meas AC inf WHEN vdb(out) = range
 meas AC sup WHEN vdb(out) = range CROSS=LAST
 
 let bandwidth = sup-inf
-let gain = maximo
+let gain = 10^(maximo/20)
+let gain_DB = maximo
 let CO_Freq= inf
 let qualidade = bandwidth*gain/CO_Freq
 
 echo "spice_results_TAB"
-echo "V_Gain=$&gain"
-echo "Bandwidth=$&bandwidth"
-echo "CO_Freq= $&CO_Freq"
+echo "V Gain = $&gain "
+echo "Gain DB = $&gain_DB dB "
+echo "Bandwidth = $&bandwidth Hz "
+echo "CO Freq = $&CO_Freq Hz "
 echo "spice_results_END"
 
 
@@ -88,19 +91,19 @@ echo "spice_results_END"
 let zin = -v(in2)[40]/vin#branch[40]
 
 echo "op_in_TAB"
-echo "Zin = $&zin"
+echo "Zin = $&zin Ohm "
 echo "op_in_END"
 
 plot abs(v(in2)[40]/vin#branch[40]/(-1000))
 
-let custo = 238.837
+let custo = 8122.45
 let merito = qualidade/custo
 
 
 echo "merito_TAB"
-echo "Cost = $&custo"
-echo "Quality = $&qualidade"
-echo "Merit = $&merito"
+echo "Cost = $&custo "
+echo "Quality = $&qualidade "
+echo "Merit = $&merito "
 echo "merito_END"
 
 

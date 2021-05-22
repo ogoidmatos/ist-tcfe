@@ -8,7 +8,7 @@ On the other hand, in the output stage of the circuit we have a circuit similar 
 
 After constructing the theorical model of the circuit we now make use of Operating Point analysis to compute the gain, input and output impedances separately for both stages of the circuit. This analysis was done with resource to the many equations provided by the slides and by the professor.
 
-Finally, we proceeded to do the frequency response analysis of the cicuit, where we obtained Figure~\ref{XXXXXX} by computing the gain $V_o(f)$/$V_i(f)$.
+Finally, we proceeded to do the frequency response analysis of the cicuit, where we obtained Figure~\ref{fig:theo} by computing the gain $V_o(f)$/$V_i(f)$.
 
 Below we can observe the values desired for both stages of the cicuit, respectively, Gain Stage in Table~\ref{tab:gain} and Output Stage in Table~\ref{tab:output}.
 
@@ -16,7 +16,7 @@ Below we can observe the values desired for both stages of the cicuit, respectiv
   \centering
   \begin{tabular}{|l|r|}
     \hline    
-    {\bf Name} & {\bf Value [Ohm]} \\ \hline
+    {\bf Name} & {\bf Value} \\ \hline
 	\input{../mat/gain}
   \end{tabular}
   \caption{Gain, input and output Impedances of the Gain Stage cicuit.}
@@ -27,7 +27,7 @@ Below we can observe the values desired for both stages of the cicuit, respectiv
   \centering
   \begin{tabular}{|l|r|}
     \hline    
-    {\bf Name} & {\bf Value [Ohm]} \\ \hline
+    {\bf Name} & {\bf Value} \\ \hline
 	\input{../mat/output}
   \end{tabular}
   \caption{Gain, input and output Impedances of the Output Stage cicuit.}
@@ -37,20 +37,21 @@ Below we can observe the values desired for both stages of the cicuit, respectiv
 %%Introduzir grafico da frequency analysis
 
 \begin{figure}[H] \centering
-\includegraphics[width=0.6\linewidth]{theo2.eps}
-\caption{Voltage in the terminals of voltage regulator cicuit.}
-\label{fig:theo2}
+\includegraphics[width=0.6\linewidth]{theo.eps}
+\caption{Gain (dB) in frequency response analysis.}
+\label{fig:theo}
 \end{figure}
 
-Finally, in Table~\ref{tab:merit} we can observe the merit, the voltage gain, the bandwidth and the lower Cutoff Frequency.
+Finally, in Table~\ref{tab:total} we can observe the merit, the voltage gain, the bandwidth and the lower Cutoff Frequency.
 
 \begin{table}[H]
   \centering
   \begin{tabular}{|l|r|}
     \hline    
     {\bf Name} & {\bf Value} \\ \hline
-	\input{../mat/merit}
+	\input{../mat/total}
   \end{tabular}
-  \caption{Voltage gain, bandwidth, lower Cutoff Frequency and merit of the circuit developed in Octave.}
-  \label{tab:merit}
+  \caption{Total gain, input and output Impedances of the cicuit.}
+  \label{tab:total}
 \end{table}
+
