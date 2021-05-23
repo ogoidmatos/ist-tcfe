@@ -13,6 +13,7 @@ RS=100
 c1 = 16.25e-6;
 c2 = 5e-3;
 c3 = 3e-3;
+Load=8;
 
 
 RB=1/(1/RB1+1/RB2);
@@ -96,19 +97,49 @@ AV_DB = 20*log10(abs(AV));
 ZI=ZI1;
 ZO=1/(go2+gm2/gpi2*gB+ge2+gB);
 
+
+RE1=137;
+%Lower CutOff Freq
+R1S = RS + (1/(1/RB + 1/rpi1));
+R2S = Load + (1/(1/RC1 + 1/ro1));
+R3S = 1/((1/RE1) + (1/(rpi1 + (1/(1/RS + 1/RB)))) + ((gm1*rpi1)/(rpi1 + (1/(1/RS + 1/RB)))));
+wL = 1/(R1S*c1) + 1/(R2S*c2) + 1/(R3S*c3);
+LowerFreq = wL/(2*pi);
+
+%Higher CutOff Freq
+Cpi = 16.1e-12;  %Valores retirados do modelo do ngspice
+Co = 4.388e-12;
+wH = 1/(Cpi*rpi1 + Co*ro1);
+HigherFreq = wH/(2*pi);
+band=HigherFreq-LowerFreq;
+
 tab=fopen("total.tex","w");
 
 fprintf(tab, "Gain DB & %fdB \\\\ \\hline \n", AV_DB);
 fprintf(tab, "Gain & %f \\\\ \\hline \n", AV);
+fprintf(tab, "Lower Cutoff Frequency & %f Hz \\\\ \\hline \n", LowerFreq);
+fprintf(tab, "Higher Cutoff Frequency & %f Hz \\\\ \\hline \n", HigherFreq);
+fprintf(tab, "Bandwidth & %f Hz \\\\ \\hline \n", band);
 fprintf(tab, "Input Impedance & %f Ohm \\\\ \\hline \n", ZI);
 fprintf(tab, "Output Impedance & %f Ohm \\\\ \\hline \n", ZO);
-
 fclose(tab);
-RE1=137;
+
+qualidade=band*AV/LowerFreq;
+custo=8122.45;
+merito=qualidade/custo;
+
+tab=fopen("octave_merit.tex","w");
+
+fprintf(tab, "Quality & %f \\\\ \\hline \n", qualidade);
+fprintf(tab, "Cost & %f \\\\ \\hline \n", custo);
+fprintf(tab, "Merit & %f \\\\ \\hline \n", merito);
+fclose(tab);
+
+
+
 vin=0.01;
 Rpi2 = 1/ gpi2;
 Ro2 = 1 / go2;
-Load=8;
 gain=[];
 gain_DB=[];
 i=1;

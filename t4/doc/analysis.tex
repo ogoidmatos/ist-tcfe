@@ -19,7 +19,7 @@ Below we can observe the values desired for both stages of the cicuit, respectiv
     {\bf Name} & {\bf Value} \\ \hline
 	\input{../mat/gain}
   \end{tabular}
-  \caption{Gain, input and output Impedances of the Gain Stage cicuit.}
+  \caption{Gain, input and output impedances of the Gain Stage cicuit.}
   \label{tab:gain}
 \end{table}
 
@@ -30,7 +30,7 @@ Below we can observe the values desired for both stages of the cicuit, respectiv
     {\bf Name} & {\bf Value} \\ \hline
 	\input{../mat/output}
   \end{tabular}
-  \caption{Gain, input and output Impedances of the Output Stage cicuit.}
+  \caption{Gain, input and output impedances of the Output Stage cicuit.}
   \label{tab:output}
 \end{table}
 
@@ -42,7 +42,7 @@ Below we can observe the values desired for both stages of the cicuit, respectiv
 \label{fig:theo}
 \end{figure}
 
-Finally, in Table~\ref{tab:total} we can observe the merit, the voltage gain, the bandwidth and the lower Cutoff Frequency.
+Finally, in Table~\ref{tab:total} we can observe the voltage gain, the bandwidth and the lower and upper Cutoff Frequency, as well as the impedances of the circuit. On Table~\ref{tab:oct_merit}, we can also observe the total cost and quality of the circuit and the resulting merit, when analysed in Octave.
 
 \begin{table}[H]
   \centering
@@ -51,7 +51,17 @@ Finally, in Table~\ref{tab:total} we can observe the merit, the voltage gain, th
     {\bf Name} & {\bf Value} \\ \hline
 	\input{../mat/total}
   \end{tabular}
-  \caption{Total gain, input and output Impedances of the cicuit.}
+  \caption{Total gain, cutoff frequencies, bandwidth and input and output impedances of the cicuit.}
   \label{tab:total}
 \end{table}
 
+\begin{table}[H]
+  \centering
+  \begin{tabular}{|l|r|}
+    \hline    
+    {\bf Name} & {\bf Value} \\ \hline
+	\input{../mat/octave_merit}
+  \end{tabular}
+  \caption{Quality, cost and Octave merit of the circuit.}
+  \label{tab:oct_merit}
+\end{table}
