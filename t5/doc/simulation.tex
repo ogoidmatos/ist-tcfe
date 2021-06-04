@@ -1,0 +1,90 @@
+\section{Simulation Analysis}
+\label{sec:simulation}
+In this section, we will show the results of the Ngspice
+simulation. Here the results were obtained with the complex
+Philips transistor model given by the Professor, which lead
+to some differences when compared with the theoretical
+analysis. This was expected since here We encounter a
+circuit that is not linear, and, as a result, the
+theoretical model used is only an approximation of the nonlinear circuit.
+Below is presented the graph for the results obtained. In
+Figure~\ref{fig:sim1} it can be observed the gain as a
+function of the frequency in log10 scale.
+
+%inserir grafico
+\begin{figure}[H] \centering
+\includegraphics[width=0.5\linewidth]{vo2f.eps}
+\caption{Gain in frequency response analysis.}
+\label{fig:sim1}
+\end{figure}
+
+The Table~\ref{tab:spice} presents the output voltage
+gain in the passband, the lower and upper 3dB cut off
+frequencies, as well as the input and output impedances in Table~\ref{tab:imped}.
+
+\begin{table}[H]
+ \centering
+ \begin{tabular}{|l|r|}
+ \hline
+ {\bf Name} & {\bf Value} \\ \hline
+\input{../sim/spice_results_tab}
+ \end{tabular}
+ \caption{Voltage gain, bandwidth and lower cutoff frequency.}
+ \label{tab:spice}
+ \end{table}
+ 
+ \begin{table}[H]
+ \centering
+ \begin{tabular}{|l|r|}
+ \hline
+ {\bf Name} & {\bf Value} \\ \hline
+\input{../sim/op_2_tab}
+\input{../sim/op_in_tab}
+ \end{tabular}
+ \caption{Input and output impedances of the circuit.}
+ \label{tab:imped}
+ \end{table}
+
+The Table~\ref{tab:forwardbias} presents for the NPN $V_{CE}$ and $V_{BE}$, as well as for
+PNP $V_{EC}$ and $V_{EB}$. As it can be seen, $V_{CE}$ $>$ $V_{BE}$ and $V_{EC}$ $>$ $V_{EB}$, which allows us to
+conclude that the transistors are in forward active region (FAR) as necessary.
+
+\begin{table}[H]
+ \centering
+ \begin{tabular}{|l|r|}
+ \hline
+ {\bf Name} & {\bf Value [V]} \\ \hline
+\input{../sim/op_tab}
+ \end{tabular}
+ \caption{Verification of the FAR.}
+ \label{tab:forwardbias}
+ \end{table}
+
+Using various values for the coupling capacitor, it became clear that it has a big
+effect on the lower cutoff frequency. By increasing its value, we were able to get
+closer to 20Hz, although increasing it has a respective increase in the overall
+cost of our amplifier.
+As far as the bypass capacitor is concerned, again by using multiple values for
+the capacitance we were able to understand that its main purpose it to stabilize
+the gain, allowing the gain to be stable in the passband that we desire. Here once
+again a compromise had to be made due to the fact that by increasing the
+capacitance the cost would also increase.
+The bypass capacitor will be an open circuit for low frequencies (where the DC is
+dominant) and a short-circuit for higher frequencies where AC is dominant. As a
+result, and as mentioned before the primary purpose of this capacitor is to
+stabilize in the passband that is desired.
+The $R_c$ resistor was also studied. The higher its resistance got, the higher the
+gain at the gain stage was. A study was as made to find the
+optimal value for this resistor.
+Finally, and as it can be seen in Table~\ref{tab:merit_spice}, our merit was excelent, resulting in great gain, bandwidth, and lower cutoff frequency. In order to achieve these, the cost of the circuit was high, but it was compensated by the high quality, which allowed us to achieve a very high merit, as seen in the table. 
+
+\begin{table}[H]
+ \centering
+ \begin{tabular}{|l|r|}
+ \hline
+ {\bf Name} & {\bf Value} \\ \hline
+\input{../sim/merito_tab}
+ \end{tabular}
+ \caption{Cost, quality and merit of the circuit.}
+ \label{tab:merit_spice}
+\end{table}

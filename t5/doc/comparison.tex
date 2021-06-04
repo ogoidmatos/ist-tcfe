@@ -1,0 +1,33 @@
+\section{Octave and Ngspice Comparison}
+\label{sec:comparision}
+
+\begin{figure}[H] \centering
+\includegraphics[width=0.5\linewidth]{theo.eps}
+\caption{Gain (dB) in frequency response analysis in Octave.}
+\label{fig:theo_comp}
+\end{figure}
+
+%inserir grafico
+\begin{figure}[H] \centering
+\includegraphics[width=0.5\linewidth]{vo2f.eps}
+\caption{Gain (dB) in frequency response analysis in Ngspice.}
+\label{fig:sim1_comp}
+\end{figure}
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{|l|r|}
+    \hline    
+    {\bf Name} & {\bf Value} \\ \hline
+	\input{../mat/total}
+  \end{tabular}
+  \begin{tabular}{|l|r|}
+    \hline    
+    {\bf Name} & {\bf Value} \\ \hline
+	\input{../sim/spice_results_tab}
+	\input{../sim/op_2_tab}
+	\input{../sim/op_in_tab}
+  \end{tabular}
+  \caption{Gain and input and output impedances. To the left we can observe the results from Octave and on the right, Ngspice. As to be expected, there is some discrepancy due to the non-linear nature of the components.}
+  \label{tab:comp}
+\end{table}

@@ -1,0 +1,67 @@
+\section{Theoretical Analysis}
+\label{sec:analysis}
+\tab In this section, the circuit shown in Figure~\ref{fig:circuit} is analysed theoretically.
+
+This circuit is divided in two diferent stages: a gain stage and an output stage. Firstly, the gain stage a cicuit similar to the one in page 5 of the slides of class L17, where it was also introduced a condensator in paralel with resistor Re, between the emitor node and the ground node. This stage of the circuit includes a bias circuit, responsible by making sure that the transistor is operating in the forward active region, and a coupling capacitor that blocks the DC component of the audio input.
+
+On the other hand, in the output stage of the circuit we have a circuit similar to the one in page 14. This one is then responsible for lowering the output impedance so values compatible with the load (8 Ohm Speaker), which is going to be placed in series with another coupling capacitor on the Vo terminals of the circuit shown.
+
+After constructing the theorical model of the circuit we now make use of Operating Point analysis to compute the gain, input and output impedances separately for both stages of the circuit. This analysis was done with resource to the many equations provided by the slides and by the professor.
+
+Finally, we proceeded to do the frequency response analysis of the cicuit, where we obtained Figure~\ref{fig:theo} by computing the gain $V_o(f)$/$V_i(f)$.
+
+Below we can observe the values desired for both stages of the cicuit, respectively, Gain Stage in Table~\ref{tab:gain} and Output Stage in Table~\ref{tab:output}.
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{|l|r|}
+    \hline    
+    {\bf Name} & {\bf Value} \\ \hline
+	\input{../mat/gain}
+  \end{tabular}
+  \caption{Gain, input and output impedances of the Gain Stage cicuit.}
+  \label{tab:gain}
+\end{table}
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{|l|r|}
+    \hline    
+    {\bf Name} & {\bf Value} \\ \hline
+	\input{../mat/output}
+  \end{tabular}
+  \caption{Gain, input and output impedances of the Output Stage cicuit.}
+  \label{tab:output}
+\end{table}
+
+%%Introduzir grafico da frequency analysis
+
+\begin{figure}[H] \centering
+\includegraphics[width=0.6\linewidth]{theo.eps}
+\caption{Gain (dB) in frequency response analysis.}
+\label{fig:theo}
+\end{figure}
+
+Finally, in Table~\ref{tab:total} we can observe the voltage gain, the bandwidth and the lower and upper Cutoff Frequency, as well as the impedances of the circuit. On Table~\ref{tab:oct_merit}, we can also observe the total cost and quality of the circuit and the resulting merit, when analysed in Octave.
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{|l|r|}
+    \hline    
+    {\bf Name} & {\bf Value} \\ \hline
+	\input{../mat/total}
+  \end{tabular}
+  \caption{Total gain, cutoff frequencies, bandwidth and input and output impedances of the cicuit.}
+  \label{tab:total}
+\end{table}
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{|l|r|}
+    \hline    
+    {\bf Name} & {\bf Value} \\ \hline
+	\input{../mat/octave_merit}
+  \end{tabular}
+  \caption{Quality, cost and Octave merit of the circuit.}
+  \label{tab:oct_merit}
+\end{table}
