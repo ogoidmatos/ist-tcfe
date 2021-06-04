@@ -8,7 +8,7 @@ ngspice1: ngspice1.log
 	$(foreach i, $(NGSFIGPS), ps2eps -B $i;)
 
 
-ngspice1.log: ../sim/t4.net
+ngspice1.log: ../sim/t5.net
 	ngspice -b $< -o $@
 	
 ngspice2: ngspice2.log
@@ -19,7 +19,7 @@ ngspice2: ngspice2.log
 	$(foreach i, $(NGSFIGPS), ps2eps -B $i;)
 
 
-ngspice2.log: ../sim/t4_1.net
+ngspice2.log: ../sim/t5_1.net
 	ngspice -b $< -o $@
 	
 clean:

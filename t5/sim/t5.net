@@ -1,5 +1,5 @@
-*-----------------------------------------------------------------------------
-*
+Lab 5
+.options savecurrents
 * To use a subcircuit, the name must begin with 'X'.  For example:
 * X1 1 2 3 4 5 uA741
 *
@@ -53,13 +53,26 @@ Vcc vcc 0 5.0
 Vee vee 0 -5.0
 Vin in 0 0 ac 1.0 sin(0 10m 1k)
 
-X1 0 inv_in vcc vee out uA741
+X1 inp_in inv_in vcc vee amp uA741
 
-R1 in inv_in 1000
-R2 inv_in out 10000
+
+C1 in inp_in 220n
+R1 inp_in 0 1k
+
+
+R3 inv_in r3 100k
+R4 r3 r4 10k
+R5 r4 r5 10k
+R6 r5 amp 10k
+
+R7 inv_in 0 1k
+
 
 * load
-RL out 0 8
+R2 amp out 1k
+C2 out 0 110n
+
+*RL out 0 8
 
 .op
 .end
@@ -68,22 +81,57 @@ RL out 0 8
 
 print all
 
-* time analysis
-tran 1e-5 1e-2
-plot v(out)
-hardcopy vo1.ps vdb(out)
-
-
 * frequency analysis
 ac dec 10 10 100MEG
-plot vdb(out)
-plot vp(out)
-hardcopy vo1f.ps vdb(out)
 
-*input impedance in kohm
-print v(in)[40]/R1[i]/1000
+hardcopy spice1.ps vdb(out)
 
-*need a different setup to measure output impedance
+
+*Gain, frequency
+let gain = vdb(out)-vdb(in)
+meas ac gain_db MAX gain
+
+let gain_dev = abs(gain_db - 40)
+
+let range = gain_db - 3
+
+meas ac lowerCOF WHEN gain=range
+meas ac higherCOF WHEN gain=range CROSS=LAST
+
+let freq = sqrt(lowerCOF*higherCOF)
+
+let freq_dev = abs(freq - 1000)
+
+let gain_m = 10^(gain_db/20)
+
+let bandwidth=higherCOF-lowerCOF
+
+*merit
+
+let cost = 130+3+0.220*3
+let merit = 1/(cost*freq_dev*gain_dev)
+
+*Input impendance
+let Zin = abs(-v(in)[20]/i(Vin)[20])
+
+
+echo "gain_TAB"
+echo "Gain = $&gain_m "
+echo "Gain dB = $&gain_db "
+echo "Central Frequency = $&freq "
+echo "Gain Deviation = $&gain_dev "
+echo "Frequency Deviation = $&freq_dev "
+echo "Bandwidth = $&bandwidth "
+echo "gain_END"
+
+echo "merito_TAB"
+echo "Cost = $&cost "
+echo "Merit = $&merit "
+echo "merito_END"
+
+echo "zin_TAB"
+echo "Input Impedance = $&Zin "
+echo "zin_END"
 
 .endc 
 
