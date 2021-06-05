@@ -2,7 +2,7 @@
 \label{sec:introduction}
 
 % state the learning objective 
-\tab The objective of this laboratory assignment is to design a bandpass filter circuit using a Operational Amplifier (A741), keeping in mind that it must be cost efficient.
+\tab The objective of this laboratory assignment is to design a bandpass filter circuit using a Operational Amplifier (A741), keeping in mind that it must be cost efficient. The equation utilized for the figure of merit can be seen in Equation~\ref{eq:merit}.
 The circuit and its organization can be seen in Figure~\ref{fig:circuit}.
 The values used in this circuit for the resistors and capacitor can be found in Table~\ref{tab:values}.
 
@@ -13,7 +13,7 @@ Section~\ref{sec:analysis}. The conclusions of this study are outlined in
 Section~\ref{sec:conclusion}.
 \\[1cm]
 \begin{figure}[h] \centering
-\includegraphics[width=0.9\linewidth]{circuit.pdf}
+\includegraphics[width=0.8\linewidth]{circuit.pdf}
 \caption{Circuit topography}
 \label{fig:circuit}
 \end{figure}
@@ -37,3 +37,8 @@ Section~\ref{sec:conclusion}.
   \caption{Resistor and Capacitor values used in the circuit.}
   \label{tab:values}
 \end{table}
+
+\begin{equation}
+	Merit = \frac{1}{Cost+Frequency Deviation + Gain Deviation + 10^{-6}}
+\label{eq:merit}
+\end{equation}

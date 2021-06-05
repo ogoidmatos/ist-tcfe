@@ -11,14 +11,14 @@ This circuit consists of an AMP-OP 741 and several resistances and capacitors. T
 \end{equation}
 
 \begin{equation}
-\left|Z_{o}\right|=\left|Z_{C 2} / /(R 2+R 3 / / 0)\right|=\left|Z_{C 2} / / R 2\right|
+\left|Z_{o}\right|=\left|Z_{Ceq} / /(R 2+R 3+Req/ / 0)\right|=\left|Z_{Ceq} / / R 2\right|
 \end{equation}
 
 \begin{equation}
 \left\{\begin{array}{l}
 v_{-}=v_{+}=\frac{R 1}{R 1+Z_{C 1}} v_{i} \\
-v_{A}=\left(1+\frac{R 3}{R 4}\right) v_{-} \\
-v_{o}=\frac{Z_{C 2}}{Z_{C 2}+R 2} v_{A}
+v_{A}=\left(1+\frac{R 3 + Req}{R 7}\right) v_{-} \\
+v_{o}=\frac{Z_{Ceq}}{Z_{Ceq}+R 2} v_{A}
 \end{array}\right.
 \end{equation}
 
