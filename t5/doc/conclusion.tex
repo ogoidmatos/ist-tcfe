@@ -1,10 +1,14 @@
 \section{Conclusion}
 \label{sec:conclusion}
 
-\tab The objective of this laboratory assignment has been accomplished as can be seen by the results obtained. As desired, the gain is high (aprox. 35.7 dB) and although the cost is big the performance is excellent.
+\tab The goal of this laboratory assignment was to make a bandpass filter, making use of an OP-AMP, as well of the components that were available. Some of the requirements were that the central frequency needed to be 1000 Hz and that the gain should be as close to 40 dB as possible. One of the main focuses of our work was, with the available components, that were limited, getting the best overall bandpass filter having in consideration the cost of every component. 
 
-Despite our efforts to get equal results with the different analysis, we concluded that, due to the non-linearity of the components of the circuit, particularly the transistors, it was impossible to obtain the exact same results. The model used by Ngspice is far more complex than the one used in the theoretical analysis.
+As was expected, the results obtained in the simulation software Ngspice were different from the ones obtained on octave. The differences are the result of the different models used. The ngspice makes used of much more complex model than the model that was used for the theorical analysis, due to the complexity in model these non-linear components (transistors and diodes). 
 
-Comparing the output impedances and the input impedances we can see that even though they are not exactly the same, they are similar. Comparing the graphics we observe similar curves with similar CO frequencies.
+Taking a closer look at the OP-AMP, and looking at the parameters established on Ngspice, its complexity comes clear, making the model used by Ngspice difficult to replicate in the theorical analysis. As a result, we concluded that one of the main sources of the differences mentioned above is exactly the OP-AMP, due to its complexity. 
 
-In conclusion, as can be seen in Table~\ref{tab:merit_spice} for a \textbf{cost of 8122.45}, we obtained a \textbf{merit of 1278.9 }in Ngspice, which we found to be excellent results.
+Having all of this in mind, this lab assignment allowed us to understand how an OP-AMP works, as well as understand its complexity. It enabled us to fully comprehend how, making use of an OP-AMP and some components we can make a filter, specifically a bandpass-filter, making use of resistors and capacitors to adjust its central frequency and gain. Moreover, deepen our study in incremental models, gain and output/input impedances was also rewarding, allowing further understanding in said subjects. 
+
+As a conclusion, and despite the differences mentioned, we can state that the projected bandpass filter can fully do what it was projected to do. Making use of Ngspice, we can see that the filter has the required characteristics, so it can be stated that the goal of this laboratory assignment was accomplished. 
+Moreover, further improvement could be made to make the gain closer to 40 dB, resulting in a higher quality of the BPF. 
+

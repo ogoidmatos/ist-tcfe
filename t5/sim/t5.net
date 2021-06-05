@@ -84,7 +84,7 @@ print all
 * frequency analysis
 ac dec 10 10 100MEG
 
-hardcopy spice1.ps vdb(out)
+hardcopy spice1.eps vdb(out)
 
 
 *Gain, frequency
@@ -109,19 +109,21 @@ let bandwidth=higherCOF-lowerCOF
 *merit
 
 let cost = 130+3+0.220*3
-let merit = 1/(cost*freq_dev*gain_dev)
+let merit = 1/(cost*freq_dev*gain_dev+10^-6)
 
 *Input impendance
 let Zin = abs(-v(in)[20]/i(Vin)[20])
 
 
 echo "gain_TAB"
-echo "Gain = $&gain_m "
-echo "Gain dB = $&gain_db "
-echo "Central Frequency = $&freq "
-echo "Gain Deviation = $&gain_dev "
-echo "Frequency Deviation = $&freq_dev "
-echo "Bandwidth = $&bandwidth "
+echo "Gain = $&gain_m V"
+echo "Gain dB = $&gain_db dB"
+echo "Central Frequency = $&freq Hz"
+echo "Lower Cut Off Frequency = $&lowerCOF Hz"
+echo "Higher Cut Off Frequency = $&higherCOF Hz"
+echo "Gain Deviation = $&gain_dev dB"
+echo "Frequency Deviation = $&freq_dev Hz"
+echo "Bandwidth = $&bandwidth Hz"
 echo "gain_END"
 
 echo "merito_TAB"

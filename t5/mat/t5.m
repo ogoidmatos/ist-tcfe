@@ -58,13 +58,15 @@ ylabel ("dB");
 print (theo, "theo.eps", "-depsc");
 	
 tab=fopen("gain.tex","w");
-
-fprintf(tab, "Gain DB & %f dB \\\\ \\hline \n", gain_db);
-fprintf(tab, "Gain & %f \\\\ \\hline \n", gain);
-fprintf(tab, "Bandwidth & %f Hz \\\\ \\hline \n", higherCOF-lowerCOF);
+fprintf(tab, "Gain & %f V \\\\ \\hline \n", gain);
+fprintf(tab, "Gain dB & %f dB \\\\ \\hline \n", gain_db);
 fprintf(tab, "Central Frequency & %f Hz \\\\ \\hline \n", central_freq);
-fprintf(tab, "Frequency Deviation & %f Hz \\\\ \\hline \n", abs(central_freq-1000));
+fprintf(tab, "Lower Cut Off Frequency & %f Hz \\\\ \\hline \n", lowerCOF);
+fprintf(tab, "Higher Cut Off Frequency & %f Hz \\\\ \\hline \n", higherCOF);
 fprintf(tab, "Gain Deviation & %f dB \\\\ \\hline \n", gain_db-40);
+fprintf(tab, "Frequency Deviation & %f Hz \\\\ \\hline \n", abs(central_freq-1000));
+
+fprintf(tab, "Bandwidth & %f Hz \\\\ \\hline \n", higherCOF-lowerCOF);
 fclose(tab);	
 	
 tab=fopen("imp_octave.tex", "w");

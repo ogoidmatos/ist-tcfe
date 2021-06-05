@@ -1,33 +1,39 @@
 \section{Octave and Ngspice Comparison}
 \label{sec:comparision}
 
+In this section a comparison is made between the results obtained on Ngspice (simulation) and the results using a simpler model on Octave (theorical analysis).
+The results obtained were the following:
 \begin{figure}[H] \centering
-\includegraphics[width=0.5\linewidth]{theo.eps}
-\caption{Gain (dB) in frequency response analysis in Octave.}
-\label{fig:theo_comp}
+  \includegraphics[width=0.5\linewidth]{theo.eps}
+  \caption{Theorical frequency response.}
+  \label{fig:theo_comp}
 \end{figure}
-
-%inserir grafico
+  %inserir grafico
 \begin{figure}[H] \centering
-\includegraphics[width=0.5\linewidth]{vo2f.eps}
-\caption{Gain (dB) in frequency response analysis in Ngspice.}
-\label{fig:sim1_comp}
+  \includegraphics[width=0.5\linewidth]{spice1.eps}
+  \caption{Simulated frequency response.}
+  \label{fig:sim_comp}
 \end{figure}
-
+  
 \begin{table}[H]
   \centering
   \begin{tabular}{|l|r|}
     \hline    
     {\bf Name} & {\bf Value} \\ \hline
-	\input{../mat/total}
+	\input{../mat/gain.tex}
+  \input{../mat/imp_octave.tex}
   \end{tabular}
   \begin{tabular}{|l|r|}
     \hline    
     {\bf Name} & {\bf Value} \\ \hline
-	\input{../sim/spice_results_tab}
-	\input{../sim/op_2_tab}
-	\input{../sim/op_in_tab}
+	\input{../sim/gain_tab.tex}
+	\input{../sim/zin_tab.tex}
+	\input{../sim/zout_tab.tex}
   \end{tabular}
-  \caption{Gain and input and output impedances. To the left we can observe the results from Octave and on the right, Ngspice. As to be expected, there is some discrepancy due to the non-linear nature of the components.}
+  \caption{Gain, frequencies, frequency deviation and input/output impedances. To the left we can observe the results from Octave and on the right the results from Ngspice.}
   \label{tab:comp}
 \end{table}
+
+ As to be expected, there is some discrepancy due to the differences in the models used to describe the OP-AMP.
+Taking a closer look at the table, we can see that the output impedances are different due to the fact that in Octave it is assumed the ideal OP-AMP model, in which its output impedance is null. In reality it is not zero, and the Ngspice model takes that into account. On the other hand, we can see that the input impedances and the gain are very similar, this shows how near perfect the OP-AMP is.
+We should also notice the small discrepancy in the Low Cut-off Frequency and in the High Cut-off Frequency (and consequently in the central frequency/ frequency deviation) which can once again be explained by the different models used to analyse the circuit.
